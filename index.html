@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>InvestCoin</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
     <style>
         body {
             font-family: 'Noto Sans', Arial, sans-serif;
@@ -17,6 +16,7 @@
             height: 100vh;
             background-color: #f0f0f0;
             overflow: hidden;
+            user-select: none; /* Disable text selection */
         }
         .background {
             position: fixed;
@@ -33,6 +33,7 @@
             height: 50px;
             opacity: 0.1;
             animation: float 20s linear infinite;
+            user-select: none; /* Disable text selection */
         }
         @keyframes float {
             from {
@@ -49,17 +50,21 @@
             padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            user-select: none; /* Disable text selection */
         }
         .coin-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
+            user-select: none; /* Disable text selection */
         }
         .coin {
-            font-size: 8em;
+            width: 100px;
+            height: 100px;
             cursor: pointer;
             transition: transform 0.1s;
+            user-select: none; /* Disable text selection */
         }
         .coin:active {
             transform: scale(0.9);
@@ -75,6 +80,7 @@
             bottom: 0;
             left: 0;
             box-sizing: border-box;
+            user-select: none; /* Disable text selection */
         }
         .nav div {
             display: flex;
@@ -86,6 +92,7 @@
             flex: 1;
             transition: transform 0.1s;
             cursor: pointer;
+            user-select: none; /* Disable text selection */
         }
         .nav div:active {
             transform: scale(0.9);
@@ -93,6 +100,7 @@
         .nav div img {
             width: 30px;
             height: 30px;
+            user-select: none; /* Disable text selection */
         }
         .nav div:not(:last-child)::after {
             content: '';
@@ -102,32 +110,33 @@
             bottom: 10%;
             width: 1px;
             background-color: #ddd;
+            user-select: none; /* Disable text selection */
         }
     </style>
 </head>
 <body>
     <div class="background">
-        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b0.png" style="top:10%;left:20%;animation-duration:18s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b5.png" style="top:40%;left:70%;animation-duration:22s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b8.png" style="top:70%;left:40%;animation-duration:16s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b6.png" style="top:30%;left:80%;animation-duration:20s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b7.png" style="top:50%;left:50%;animation-duration:24s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" style="top:10%;left:20%;animation-duration:18s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b5.svg" style="top:40%;left:70%;animation-duration:22s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" style="top:70%;left:40%;animation-duration:16s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b6.svg" style="top:30%;left:80%;animation-duration:20s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg" style="top:50%;left:50%;animation-duration:24s;">
     </div>
     <div class="balance">0.00000 $INV</div>
     <div class="coin-container">
-        <div class="coin">💰</div>
+        <img class="coin" src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" alt="Coin">
     </div>
     <div class="nav">
         <div>
-            <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4c8.png" alt="INVEST">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4c8.svg" alt="INVEST">
             <div>INVEST</div>
         </div>
         <div>
-            <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f3ae.png" alt="PLAY">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg" alt="PLAY">
             <div>PLAY</div>
         </div>
         <div>
-            <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f465.png" alt="FRIENDS">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
             <div>FRIENDS</div>
         </div>
     </div>
