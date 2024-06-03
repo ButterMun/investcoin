@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>InvestCoin</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
     <style>
         body {
-            font-family: 'Noto Emoji', Arial, sans-serif;
+            font-family: 'Noto Sans', Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -27,9 +27,10 @@
             z-index: -1;
             overflow: hidden;
         }
-        .background span {
+        .background img {
             position: absolute;
-            font-size: 3em;
+            width: 50px;
+            height: 50px;
             opacity: 0.1;
             animation: float 20s linear infinite;
         }
@@ -89,8 +90,9 @@
         .nav div:active {
             transform: scale(0.9);
         }
-        .nav div span {
-            font-size: 2em;
+        .nav div img {
+            width: 30px;
+            height: 30px;
         }
         .nav div:not(:last-child)::after {
             content: '';
@@ -105,11 +107,11 @@
 </head>
 <body>
     <div class="background">
-        <span style="top:10%;left:20%;animation-duration:18s;">💸</span>
-        <span style="top:40%;left:70%;animation-duration:22s;">💵</span>
-        <span style="top:70%;left:40%;animation-duration:16s;">💰</span>
-        <span style="top:30%;left:80%;animation-duration:20s;">💶</span>
-        <span style="top:50%;left:50%;animation-duration:24s;">💷</span>
+        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b0.png" style="top:10%;left:20%;animation-duration:18s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b5.png" style="top:40%;left:70%;animation-duration:22s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b8.png" style="top:70%;left:40%;animation-duration:16s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b6.png" style="top:30%;left:80%;animation-duration:20s;">
+        <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4b7.png" style="top:50%;left:50%;animation-duration:24s;">
     </div>
     <div class="balance">0.00000 $INV</div>
     <div class="coin-container">
@@ -117,15 +119,15 @@
     </div>
     <div class="nav">
         <div>
-            <span>📈</span>
+            <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f4c8.png" alt="INVEST">
             <div>INVEST</div>
         </div>
         <div>
-            <span>🎮</span>
+            <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f3ae.png" alt="PLAY">
             <div>PLAY</div>
         </div>
         <div>
-            <span>👥</span>
+            <img src="https://twemoji.maxcdn.com/v/latest/72x72/1f465.png" alt="FRIENDS">
             <div>FRIENDS</div>
         </div>
     </div>
