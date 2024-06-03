@@ -15,6 +15,30 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .background span {
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+            }
         }
         .balance {
             font-size: 1.5em;
@@ -24,9 +48,14 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        .coin-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .coin {
             font-size: 8em;
-            margin: 20px 0;
             cursor: pointer;
             transition: transform 0.1s;
         }
@@ -51,15 +80,40 @@
             align-items: center;
             font-size: 1.2em;
             color: #333;
+            position: relative;
+            flex: 1;
+            transition: transform 0.1s;
+            cursor: pointer;
+        }
+        .nav div:active {
+            transform: scale(0.9);
         }
         .nav div span {
             font-size: 2em;
         }
+        .nav div:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%;
+            bottom: 10%;
+            width: 1px;
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
+    <div class="background">
+        <span style="top:10%;left:20%;animation-duration:18s;">💸</span>
+        <span style="top:40%;left:70%;animation-duration:22s;">💵</span>
+        <span style="top:70%;left:40%;animation-duration:16s;">💰</span>
+        <span style="top:30%;left:80%;animation-duration:20s;">💶</span>
+        <span style="top:50%;left:50%;animation-duration:24s;">💷</span>
+    </div>
     <div class="balance">0.00000 $INV</div>
-    <div class="coin" onclick="clickCoin()">💰</div>
+    <div class="coin-container">
+        <div class="coin">💰</div>
+    </div>
     <div class="nav">
         <div>
             <span>📈</span>
@@ -74,11 +128,5 @@
             <div>FRIENDS</div>
         </div>
     </div>
-
-    <script>
-        function clickCoin() {
-            alert('Монетка нажата!');
-        }
-    </script>
 </body>
 </html>
