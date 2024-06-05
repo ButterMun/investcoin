@@ -98,14 +98,9 @@
             transition: transform 0.1s;
             cursor: pointer;
             user-select: none; /* Disable text selection */
-			border-bottom-left-radius: 11px;
-			border-bottom-right-radius: 11px;
-			border-top-left-radius: 11px;
-			border-top-right-radius: 11px;
         }
         .nav div:active {
             transform: scale(0.9);
-			background-color: rgba(255, 255, 255, 0.1);
 			
         }
         .nav div img {
@@ -661,53 +656,43 @@
 
     <div class="nav">
         
-        <div onclick="showScreen('invest-screen')" data-screen="invest-screen">
-    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4c8.svg" alt="INVEST">
-    <div>INVEST</div>
-</div>
-<div onclick="showScreen('hashrate-screen')" data-screen="hashrate-screen">
-    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" alt="HASHRATE">
-    <div>HASHRATE</div>
-</div>
-<div onclick="showScreen('main-screen')" data-screen="main-screen" style="background-color: rgba(255, 235, 59, 0.5);">
-    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg" alt="PLAY">
-    <div>PLAY</div>
-</div>
-
-<div onclick="showScreen('friends-screen')" data-screen="friends-screen">
-    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
-    <div>FRIENDS</div>
-</div>
-<div onclick="showScreen('profile-screen')" data-screen="profile-screen">
+        <div onclick="showScreen('invest-screen')">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4c8.svg" alt="INVEST">
+            <div>INVEST</div>
+        </div>
+        <div onclick="showScreen('hashrate-screen')">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" alt="HASHRATE">
+            <div>HASHRATE</div>
+        </div>
+		<div onclick="showScreen('main-screen')">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg" alt="PLAY">
+            <div>PLAY</div>
+        </div>
+		<div onclick="showScreen('friends-screen')">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
+            <div>FRIENDS</div>
+        </div>
+		<div onclick="showScreen('profile-screen')">
     <img src="https://twemoji.maxcdn.com/v/latest/svg/1f464.svg" alt="PROFILE">
     <div>PROFILE</div>
-</div>
-
-
 </div>
 
     </div>
 
     <script>
-        
-		
-	function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
 
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+		
     removeAllClickTexts();
 
-    // Установите цвет фона активной вкладки
-    document.querySelectorAll('.nav div').forEach(tab => {
-        tab.style.backgroundColor = ''; // Сначала сбросьте цвет всех вкладок
-    });
-    const selectedTab = document.querySelector(`.nav div[data-screen="${screenId}"]`);
-    if (selectedTab) {
-        selectedTab.style.backgroundColor = 'rgba(255, 235, 59, 0.5)'; // Установите желтый цвет фона для выбранной вкладки
-    }
-}
+        }
 		
 		
 	function showInfo(type) {
