@@ -66,6 +66,24 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 			
 			
         }
+		
+		
+		@keyframes pulse {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 0, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.7)) drop-shadow(0 0 13px rgba(255, 255, 0, 0.7)) drop-shadow(0 0 18px rgba(255, 255, 0, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 0, 0.5));
+    }
+}
+
+.coin {
+
+}
+		
         
         .coin {
             width: 250px;
@@ -73,7 +91,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             cursor: pointer;
             transition: transform 0.09s;
             user-select: none; /* Disable text selection */
-        }
+			    animation: pulse 10s infinite;
+			}
         .coin:active {
             transform: scale(0.9);
         }
