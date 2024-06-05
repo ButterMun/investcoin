@@ -9,6 +9,10 @@ async function connectToWallet() {
            twaReturnUrl: 'https://t.me/InvestWorldTest_bot'
         }
     });
+	
+	tonConnectUI.uiOptions = {
+    twaReturnUrl: 'https://t.me/durov'
+};
 
     try {
         const connectedWallet = await tonConnectUI.connectWallet();
