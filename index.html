@@ -50,12 +50,22 @@
         .balance {
             font-size: 2em;
             margin-top: 20px;
-            background: #ff9800;
             color: #fff;
             padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             user-select: none; /* Disable text selection */
+			
+			/* From https://css.glass */
+background: rgba(255, 156,0, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+			
+			
+			
         }
         
         .coin {
@@ -72,7 +82,7 @@
             display: flex;
             justify-content: space-around;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px 0;
             box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
             position: fixed;
@@ -369,7 +379,6 @@
     position: fixed;
     top: 15vh; /* Задаем смещение от верхнего края экрана */
     background-color: #ff9800;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 	border-top-left-radius: 10px;
@@ -380,16 +389,27 @@
     display: flex; /* Добавлено для использования flexbox */
     align-items: center; /* Выровнять элементы по центру по вертикали */
     justify-content: center; /* Выровнять элементы по центру по горизонтали */
+
+/* From https://css.glass */
+background: rgba(255, 152, 0, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+
+
 }
 
 .tab {
-    background-color: black !important; /* Используем !important, чтобы переопределить другие стили */
-    color: #ffeb3b !important; /* Желтый текст */
+    background-color: black !important;
+    color: #ffeb3b !important;
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.1s;
+    font-weight: bold; /* Делаем текст жирным */
 }
 .tab:hover {
     transform: scale(1.05);
@@ -422,25 +442,25 @@
             align-items: center;
             user-select: none; /* Disable text selection */
 			position: relative;
-    /* Добавьте или измените это свойство для создания нужного отступа */
-    margin-top: 20px;
+	
+	  position: absolute; /* Используем абсолютное позиционирование */
+    top: 50%; /* Помещаем верхний край на середину экрана */
+    left: 50%; /* Помещаем левый край на середину экрана */
+    transform: translate(-50%, -50%);
+	
+	
+	
         }
 
 .energy-bar {
     position: absolute;
-    bottom: 20%;
+    bottom: -20%;
     left: 50%; /* Размещаем по центру */
     transform: translateX(-50%); /* Центрируем относительно родителя */
     display: flex;
     align-items: center;
     margin-top: 10px; /* Заменили margin-bottom на margin-top */
 }
-
-
-.coin-container {
-    position: relative; /* Добавили это свойство для позиционирования абсолютных элементов относительно него */
-}
-
 
 .energy-bar img {
     width: 25px;
@@ -535,7 +555,7 @@
         width: 0;
         background-color: #ff9800;
         border-radius: 10px;
-        transition: width 5s;
+        transition: width 2.5s;
 		 -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
     appearance: none; /* Отключаем стилизацию браузера */
     }
@@ -544,6 +564,19 @@
 	font-size: 0.5em;
 	
 	}
+	
+	
+	@media screen and (max-height: 670px) {
+    .coin-container {
+        margin-top: 0px; /* Уменьшаем отступ для coin-container */
+    }
+    .energy-bar {
+        bottom: -30%; /* Уменьшаем отступ снизу для energy-bar */
+    }
+    .click-text {
+        font-size: 20px; /* Уменьшаем размер текста для click-text */
+    }
+}
 
 
 
@@ -664,9 +697,9 @@
     <div id="hashrate-screen" class="screen">
 	
 	 <div class="card">
-	 <div class="card-title">Hashrate Dashboard</div>
-    <div class="card-content">Click on card to read info</div>
-	
+	 <div class="card-title">Overall Statistics</div>
+   <div class="card-content" style="font-size: 0.8em;">Click on card to read info</div>
+
     <div class="card" onclick="showInfo('mined')">
     <div class="card-title">Total Tokens Mined</div>
     <div class="card-content">0.00000 $INV</div>
@@ -889,7 +922,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     loadingOverlay.style.display = 'none';
                 }, 1000);
-            }, 5000);
+            }, 2500);
         });
 
 		
