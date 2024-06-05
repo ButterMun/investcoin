@@ -439,7 +439,25 @@
 
 .energy-bar progress {
     width: 150px;
-    height: 40px;
+    height: 20px;
+    -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
+    appearance: none; /* Отключаем стилизацию браузера */
+}
+
+.energy-bar progress::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.energy-bar progress::-webkit-progress-value {
+    background-color: #0080ff;
+    border-radius: 5px;
+}
+
+.energy-bar progress::-moz-progress-bar {
+    background-color: #0080ff;
+    border-radius: 5px;
 }
 
 .energy-bar span {
@@ -487,16 +505,17 @@
         <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg" style="top:50%;left:50%;animation-duration:24s;">
     </div>
     <div class="balance">0.00000 $INV</div>
-<div id="click-text" class="click-text"></div>
+
 <div id="main-screen" class="screen active">
+<div id="click-text" class="click-text"></div>
     <div class="coin-container">
 	
 
         <img class="coin" src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" alt="Coin">
         <div class="energy-bar">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/26a1.svg" alt="Lightning">
-            <progress value="1000" max="1000"></progress>
-            <span>1000/1000</span>
+            <progress value="500" max="1000"></progress>
+            <span>500/1000</span>
         </div>
     </div>
 </div>
@@ -668,6 +687,9 @@
                 screen.classList.remove('active');
             });
             document.getElementById(screenId).classList.add('active');
+		
+    removeAllClickTexts();
+
         }
 		
 		
@@ -734,36 +756,47 @@ function showRiskLevel(level) {
 
 const coins = document.querySelectorAll('.coin');
 
-        coins.forEach(coin => {
-            coin.addEventListener('click', showClickText);
-        });
+coins.forEach(coin => {
+    coin.addEventListener('click', showClickText);
+});
 
-        function showClickText(event) {
-            const clickText = document.createElement('div');
-            clickText.classList.add('click-text');
-            clickText.innerHTML = '+0.001';
+function showClickText(event) {
+    const mainScreen = document.getElementById('main-screen');
+    if (!mainScreen.classList.contains('active')) {
+        return;
+    }
 
-            document.body.appendChild(clickText);
+    const clickText = document.createElement('div');
+    clickText.classList.add('click-text');
+    clickText.innerHTML = '+0.001';
+
+    document.body.appendChild(clickText);
+
+    const clickX = event.clientX;
+    const clickY = event.clientY;
+
+    clickText.style.left = clickX + 'px';
+    clickText.style.top = clickY + 'px';
+
+    setTimeout(() => {
+        clickText.classList.add('fade-in-text');
+    }, 10);
+
+    setTimeout(() => {
+        clickText.classList.add('fade-out-text');
+    }, 500);
+
+    setTimeout(() => {
+        clickText.remove();
+    }, 1500);
+}
 
 
-            const clickX = event.clientX;
-            const clickY = event.clientY;
 
-            clickText.style.left = clickX + 'px';
-            clickText.style.top = clickY + 'px';
-
-            setTimeout(() => {
-                clickText.classList.add('fade-in-text');
-            }, 10);
-
-            setTimeout(() => {
-                clickText.classList.add('fade-out-text');
-            }, 500);
-
-            setTimeout(() => {
-                clickText.remove();
-            }, 1500);
-        }
+function removeAllClickTexts() {
+    const clickTexts = document.querySelectorAll('.click-text');
+    clickTexts.forEach(clickText => clickText.remove());
+}
 
 
 
