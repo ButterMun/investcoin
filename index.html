@@ -812,7 +812,6 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 <div id="profile-screen" class="screen">
     <div class="profile-container">
         <div class="profile-info">
-            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile Picture">
             <h2>John Doe</h2>
 			<p>Status: Inactive</p>
             <p>Shares Owned: 100</p>
@@ -873,12 +872,16 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 		 let profilePicture = document.querySelector('.profile-info img');
     let profileName = document.querySelector('.profile-info h2');
 
+		 // Проверяем наличие данных перед их использованием
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) {
+        // Изменяем фото профиля на аватарку из Telegram
+        profilePicture.src = tg.initDataUnsafe.user.photo_url;
+    }
 
     if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.first_name && tg.initDataUnsafe.user.last_name) {
         // Изменяем имя пользователя на имя из Telegram
-     //   profileName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-		 profilePicture.src = tg.initDataUnsafe.user.photo_url;
-		profileName.innerText = profilePicture.src;
+        profileName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+
     }
 	
 	
