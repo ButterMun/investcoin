@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>InvestHub</title>
     <style>
         body {
@@ -860,6 +861,11 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     </div>
 
     <script>
+	
+	window.Telegram.WebApp.expand();
+	
+	
+	
         document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
         });
@@ -990,12 +996,6 @@ function removeAllClickTexts() {
 
 document.addEventListener('DOMContentLoaded', function() {
   
-  if (window.Telegram && window.Telegram.WebApp) {
-        window.Telegram.WebApp.expand();
-    }
-
-
-
     const images = document.querySelectorAll('img');
     const totalImages = images.length;
     let loadedImages = 0;
