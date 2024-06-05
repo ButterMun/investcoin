@@ -56,7 +56,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             user-select: none; /* Disable text selection */
 			
-			/* From https://css.glass */
+/* glass */
 background: rgba(255, 156,0, 0.2);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -90,7 +90,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             box-sizing: border-box;
             user-select: none; /* Disable text selection */
             
-            /* From https://css.glass */
+            /* glass */
             border-radius: 16px;
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
@@ -173,6 +173,28 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+.glass-card{
+ color: #fff;
+ padding: 20px;
+ margin: 10px 0;
+ border-radius: 10px;
+ width: 80%;  /* Change to a percentage for responsive design */
+ max-width: 500px;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+ user-select: none; /* Disable text selection */
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+/* glass */
+background: rgba(255, 255, 255, 0);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.4px);
+-webkit-backdrop-filter: blur(7.4px);
+border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .info-icon {
@@ -713,7 +735,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 	
     <div id="hashrate-screen" class="screen">
 	
-	 <div class="card">
+	 <div class="glass-card">
 	 <div class="card-title">Overall Statistics</div>
    <div class="card-content" style="font-size: 0.8em;">Click on card to read info</div>
 
@@ -946,6 +968,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (allImagesLoaded) {
         console.log('Все изображения уже загружены!');
         completeLoading();
+        clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
     } else {
         timeoutID = setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
@@ -985,8 +1008,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 0);
     }
 });
-
-
 
 
 
