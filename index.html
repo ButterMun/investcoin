@@ -1039,9 +1039,8 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         timeoutID = setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
-            loadingText.textContent = 'Something went wrong 😨 Page will be reloaded!';
+            loadingText.textContent = 'Something went wrong 😨 Wait or update the page';
             timeoutID = setTimeout(() => {
-                location.reload();
             }, 5000);
         }, 15000);
     }
