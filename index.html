@@ -615,6 +615,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     .progress-bar {
         width: 80%;
         height: 20px;
+		max-width: 300px;
         background-color: #fff;
         margin-top: 20px;
         border-radius: 10px;
@@ -988,12 +989,24 @@ function removeAllClickTexts() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  
+  if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.expand();
+    }
+
+
+
     const images = document.querySelectorAll('img');
     const totalImages = images.length;
     let loadedImages = 0;
     let timeoutID;
 
     images.forEach(image => {
+	
+	image.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+        });
+	
         if (image.complete) {
             loadedImages++;
         } else {
