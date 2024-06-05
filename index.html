@@ -14,16 +14,14 @@
             justify-content: space-between;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #121212;
             overflow: hidden;
             user-select: none; /* Disable text selection */
             -webkit-user-select: none;
             -ms-user-select: none;
-            background: rgb(219,216,126);
-background: linear-gradient(180deg, rgba(219,216,126,1) 0%, rgba(163,46,164,1) 100%);
-		
-		
-		}
+            background: rgb(18,18,18);
+            background: linear-gradient(180deg, rgba(18,18,18,1) 0%, rgba(36,36,36,1) 100%);
+        }
         .background {
             position: fixed;
             top: 0;
@@ -52,24 +50,19 @@ background: linear-gradient(180deg, rgba(219,216,126,1) 0%, rgba(163,46,164,1) 1
         .balance {
             font-size: 2em;
             margin-top: 20px;
-            background: #ffeb3b;
+            background: #ff9800;
+            color: #fff;
             padding: 10px 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             user-select: none; /* Disable text selection */
         }
-        .coin-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none; /* Disable text selection */
-        }
+        
         .coin {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             cursor: pointer;
-            transition: transform 0.1s;
+            transition: transform 0.09s;
             user-select: none; /* Disable text selection */
         }
         .coin:active {
@@ -79,29 +72,27 @@ background: linear-gradient(180deg, rgba(219,216,126,1) 0%, rgba(163,46,164,1) 1
             display: flex;
             justify-content: space-around;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
             position: fixed;
             bottom: 0;
             left: 0;
             box-sizing: border-box;
             user-select: none; /* Disable text selection */
-			
-			/* From https://css.glass */
-background: rgba(255, 255, 255, 0.22);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+            
+            /* From https://css.glass */
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         .nav div {
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 1.2em;
-            color: #333;
+            font-size: 1em;
+            color: #ffeb3b;
             position: relative;
             flex: 1;
             transition: transform 0.1s;
@@ -123,9 +114,368 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             top: 10%;
             bottom: 10%;
             width: 1px;
-            background-color: #ddd;
+            background-color: #333;
             user-select: none; /* Disable text selection */
         }
+        .screen {
+            display: none;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            user-select: none; /* Disable text selection */
+        }
+        .screen.active {
+            display: flex;
+        }
+		
+/* Center the cards vertically and horizontally */
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* Center cards vertically */
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    width: 80%;  /* Change to a percentage for responsive design */
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    user-select: none; /* Disable text selection */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-icon {
+    position: fixed;
+    top: 30px;
+    right: 10px;
+    background: #ff9800;
+    color: #fff;
+    font-size: 1.5em;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #333;
+    color: #ffe;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 80%;
+    opacity: 0;  /* Start hidden for animation */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;  /* Make visible */
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal.hide {
+    opacity: 0;  /* Hide */
+    transform: translate(-50%, -50%) scale(0.9);
+}
+
+.modal-content {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.modal.show + .modal-background {
+    display: block; /* Показать фон только когда окно открыто */
+}
+
+
+.ok-button {
+    padding: 10px 20px;
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s;
+    display: block;
+    margin: 0 auto;
+}
+
+.ok-button:active {
+    transform: scale(0.9);
+}
+
+.fade-in {
+    animation: fadeInAnimation 0.3s ease forwards;
+    transform: translate(-50%, -50%) scale(0.9); /* Начальное значение масштаба */
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9); /* Начальное значение масштаба */
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1); /* Конечное значение масштаба */
+    }
+}
+
+
+.fade-out {
+    animation: fadeOutAnimation 0.3s ease forwards;
+    transform: translate(-50%, -50%) scale(1); /* Начальное значение масштаба */
+}
+
+@keyframes fadeOutAnimation {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1); /* Начальное значение масштаба */
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9); /* Конечное значение масштаба */
+    }
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный цвет */
+    z-index: 999; /* Выше, чем остальные элементы, но ниже, чем модальное окно */
+    display: none; /* Сначала скрыто */
+}
+
+.modal.show + .modal-background {
+    display: block; /* Показать фон только когда окно открыто */
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.profile-info {
+    margin-bottom: 20px;
+}
+
+.profile-info img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-actions button {
+    padding: 10px 20px;
+    background: #4CAF50; /* Зеленый цвет */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.profile-actions button:hover {
+    background-color: #45a049; /* Темнее зеленый при наведении */
+}
+
+/* friends */
+
+.friends-container {
+    text-align: center;
+}
+
+.friends-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.friend {
+    margin: 10px;
+}
+
+.friend img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.friend p {
+    margin-top: 5px;
+}
+
+.earnings-info {
+    margin-top: 20px;
+}
+
+.earnings-info button {
+    padding: 10px 20px;
+    background: #4CAF50; /* Зеленый цвет */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+/* invest */
+.tabs {
+    position: fixed;
+    top: 15vh; /* Задаем смещение от верхнего края экрана */
+    background-color: #ff9800;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    z-index: 10;
+	padding: 20px;
+    
+    display: flex; /* Добавлено для использования flexbox */
+    align-items: center; /* Выровнять элементы по центру по вертикали */
+    justify-content: center; /* Выровнять элементы по центру по горизонтали */
+}
+
+.tab {
+    background-color: black !important; /* Используем !important, чтобы переопределить другие стили */
+    color: #ffeb3b !important; /* Желтый текст */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.tab:hover {
+    transform: scale(1.05);
+}
+
+.tab.active {
+    background-color: #ffeb3b !important; /* Желтый фон */
+    color: black !important; /* Черный текст */
+}
+
+.investment-options {
+    text-align: center;
+}
+
+.risk-level {
+    display: none;
+}
+
+.risk-level.active {
+    display: block;
+}
+
+/* main-screen */
+
+
+.coin-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none; /* Disable text selection */
+			position: relative;
+    /* Добавьте или измените это свойство для создания нужного отступа */
+    margin-top: 20px;
+        }
+
+.energy-bar {
+    position: absolute;
+    bottom: 20%;
+    left: 50%; /* Размещаем по центру */
+    transform: translateX(-50%); /* Центрируем относительно родителя */
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Заменили margin-bottom на margin-top */
+}
+
+
+.coin-container {
+    position: relative; /* Добавили это свойство для позиционирования абсолютных элементов относительно него */
+}
+
+
+.energy-bar img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.energy-bar progress {
+    width: 150px;
+    height: 30px;
+}
+
+.energy-bar span {
+            margin-left: 10px;
+            font-size: 20px; /* Размер шрифта */
+        }
+
+
+.click-text {
+    position: absolute; /* Добавлено */
+    color:  #ffeb3b;
+    font-size: 30px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 1s ease, top 1s ease; /* Добавлено transform и top в transition */
+    pointer-events: none;
+    z-index: 100;
+	text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.fade-in-text {
+    opacity: 1;
+    transform: translateY(0); /* Добавлено */
+    top: calc(50% - 50px); /* Стартовая позиция */
+}
+
+.fade-out-text {
+    opacity: 0;
+    transform: translateY(-50px); /* Добавлено */
+    top: 20px; /* Конечная позиция */
+}
+
+
+
+
+
+		
     </style>
 </head>
 <body>
@@ -137,28 +487,287 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg" style="top:50%;left:50%;animation-duration:24s;">
     </div>
     <div class="balance">0.00000 $INV</div>
+<div id="click-text" class="click-text"></div>
+<div id="main-screen" class="screen active">
     <div class="coin-container">
+	
+
         <img class="coin" src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" alt="Coin">
+        <div class="energy-bar">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/26a1.svg" alt="Lightning">
+            <progress value="1000" max="1000"></progress>
+            <span>1000/1000</span>
+        </div>
     </div>
+</div>
+
+
+
+
+
+
+
+<div id="invest-screen" class="screen">
+    <div class="tabs">
+        <button class="tab active" onclick="showRiskLevel('low')">Low Risk</button>
+        <button class="tab" onclick="showRiskLevel('medium')">Medium Risk</button>
+        <button class="tab" onclick="showRiskLevel('high')">High Risk</button>
+    </div>
+    <div class="investment-options">
+        <!-- Здесь будут показаны варианты инвестиций -->
+        <div id="low-risk" class="risk-level active">
+            <h2>Low Risk Investments</h2>
+            <p>These investments offer lower returns but are less likely to lose value.</p>
+            <!-- Добавьте варианты инвестиций с низким риском -->
+        </div>
+        <div id="medium-risk" class="risk-level" style="display: none;">
+            <h2>Medium Risk Investments</h2>
+            <p>These investments offer moderate returns with some level of risk.</p>
+            <!-- Добавьте варианты инвестиций с средним риском -->
+        </div>
+        <div id="high-risk" class="risk-level" style="display: none;">
+            <h2>High Risk Investments</h2>
+            <p>These investments offer potentially high returns but come with significant risk.</p>
+            <!-- Добавьте варианты инвестиций с высоким риском -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="friends-screen" class="screen">
+    <div class="friends-container">
+        <h2>Your Friends</h2>
+        <p>You earn 10% of what your friends earn.</p>
+        <div class="friends-list">
+            <div class="friend">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Friend 1">
+                <p>Friend 1</p>
+            </div>
+            <div class="friend">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Friend 2">
+                <p>Friend 2</p>
+            </div>
+            <!-- Добавьте других друзей здесь -->
+        </div>
+        <div class="earnings-info">
+            <p>Total Earned: 50.00000 $INV</p>
+            <button>Claim Earnings</button>
+        </div>
+    </div>
+</div>
+
+
+    
+	
+	
+	
+    <div id="hashrate-screen" class="screen">
+	
+	 <div class="card">
+	 <div class="card-title">Hashrate Dashboard</div>
+    <div class="card-content">Click on card to read info</div>
+	
+    <div class="card" onclick="showInfo('mined')">
+    <div class="card-title">Total Tokens Mined</div>
+    <div class="card-content">0.00000 $INV</div>
+</div>
+
+    <div class="card" onclick="showInfo('spent')">
+        <div class="card-title">Total Tokens Spent</div>
+        <div class="card-content">0.00000 $INV</div>
+    </div>
+    <div class="card" onclick="showInfo('halving')">
+        <div class="card-title">Time Until Halving</div>
+        <div class="card-content">365 Days</div>
+    </div>
+	
+	
+	
+
+    <div id="info-modal" class="modal hide">
+    <div class="modal-content">
+        <p>InvestCoin is a limited-supply cryptocurrency with a fixed maximum supply. The mining reward halves every four years, making it increasingly scarce over time.</p>
+        <button onclick="hideInfo()" class="ok-button">Ok</button>
+    </div>
+</div>
+
+<div class="modal-background"></div>
+
+</div>
+
+    </div>
+	
+	
+<div id="profile-screen" class="screen">
+    <div class="profile-container">
+        <div class="profile-info">
+            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile Picture">
+            <h2>John Doe</h2>
+            <p>Email: johndoe@example.com</p>
+            <p>Location: New York City</p>
+            <p>Total Invested: $5000</p>
+            <p>Shares Owned: 100</p>
+            <p>Crypto Mined: 5 BTC</p>
+            <p>Wallet Address: 0x1234...5678</p>
+        </div>
+        <div class="profile-actions">
+            <button>Update Profile</button>
+            <button>Logout</button>
+        </div>
+    </div>
+</div>
+
+	
+
     <div class="nav">
-        <div>
+        
+        <div onclick="showScreen('invest-screen')">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4c8.svg" alt="INVEST">
             <div>INVEST</div>
         </div>
-        <div>
+        <div onclick="showScreen('hashrate-screen')">
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" alt="HASHRATE">
+            <div>HASHRATE</div>
+        </div>
+		<div onclick="showScreen('main-screen')">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg" alt="PLAY">
             <div>PLAY</div>
         </div>
-        <div>
+		<div onclick="showScreen('friends-screen')">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
             <div>FRIENDS</div>
         </div>
+		<div onclick="showScreen('profile-screen')">
+    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f464.svg" alt="PROFILE">
+    <div>PROFILE</div>
+</div>
+
     </div>
 
     <script>
         document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
         });
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+		
+		
+	function showInfo(type) {
+    const modal = document.getElementById('info-modal');
+    const modalContent = document.querySelector('.modal-content');
+
+    let infoText = '';
+    if (type === 'mined') {
+        infoText = "Tokens are mined through a process called proof of work, where powerful computers solve complex mathematical problems to validate transactions and create new blocks on the blockchain.";
+    } else if (type === 'spent') {
+        infoText = "Tokens are spent when users perform transactions, such as buying goods or services, transferring funds, or participating in decentralized finance (DeFi) activities.";
+    } else if (type === 'halving') {
+        infoText = "Token halving is a mechanism in which the mining reward for each block is reduced by half approximately every four years. This is designed to control inflation and gradually decrease the token supply over time.";
+    } else {
+        infoText = "InvestCoin is a limited-supply cryptocurrency with a fixed maximum supply. The mining reward halves every four years, making it increasingly scarce over time.";
+    }
+
+    modalContent.innerHTML = `<p>${infoText}</p><button onclick="hideInfo()" class="ok-button">Ok</button>`;
+
+    modal.classList.remove('hide');
+    modal.classList.add('show');
+    modal.style.display = 'block';
+    if (!modal.classList.contains('fade-in')) {
+        modal.classList.add('fade-in');
+    }
+}
+
+
+function hideInfo() {
+    const modal = document.getElementById('info-modal');
+    modal.classList.remove('show');
+    modal.classList.add('hide');
+    // Добавляем класс 'fade-out' только если его нет
+    if (!modal.classList.contains('fade-out')) {
+        modal.classList.add('fade-out');
+    }
+    setTimeout(() => {
+        modal.style.display = 'none';
+        // После окончания анимации, удаляем классы 'hide' и 'fade-out'
+        modal.classList.remove('hide', 'fade-out');
+    }, 300);  // Соответствует длительности CSS-перехода
+}
+
+
+
+function showRiskLevel(level) {
+        // Сначала скрываем все уровни риска
+        document.querySelectorAll('.risk-level').forEach(function(levelElement) {
+            levelElement.style.display = 'none';
+        });
+
+        // Затем показываем выбранный уровень риска
+        document.getElementById(level + '-risk').style.display = 'block';
+        
+        // Делаем выбранную кнопку активной, а остальные неактивными
+        document.querySelectorAll('.tab').forEach(function(tab) {
+            tab.classList.remove('active');
+        });
+        document.querySelector('.tab.active').classList.remove('active');
+        document.querySelector('.tab.' + level).classList.add('active');
+    }
+
+
+const coins = document.querySelectorAll('.coin');
+
+        coins.forEach(coin => {
+            coin.addEventListener('click', showClickText);
+        });
+
+        function showClickText(event) {
+            const clickText = document.createElement('div');
+            clickText.classList.add('click-text');
+            clickText.innerHTML = '+0.001';
+
+            document.body.appendChild(clickText);
+
+
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+
+            clickText.style.left = clickX + 'px';
+            clickText.style.top = clickY + 'px';
+
+            setTimeout(() => {
+                clickText.classList.add('fade-in-text');
+            }, 10);
+
+            setTimeout(() => {
+                clickText.classList.add('fade-out-text');
+            }, 500);
+
+            setTimeout(() => {
+                clickText.remove();
+            }, 1500);
+        }
+
+
+
+		
     </script>
 </body>
 </html>
