@@ -103,6 +103,15 @@
             transform: scale(0.9);
 			
         }
+		
+		.nav div.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    border-radius: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+		
+		
         .nav div img {
             width: 30px;
             height: 30px;
@@ -517,6 +526,8 @@
         margin-top: 20px;
         border-radius: 10px;
         overflow: hidden;
+		 -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
+    appearance: none; /* Отключаем стилизацию браузера */
     }
 
     .progress-bar div {
@@ -525,6 +536,8 @@
         background-color: #ff9800;
         border-radius: 10px;
         transition: width 5s;
+		 -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
+    appearance: none; /* Отключаем стилизацию браузера */
     }
 	
 	.loading-text{
@@ -713,9 +726,9 @@
         </div>
         <div onclick="showScreen('hashrate-screen')">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" alt="HASHRATE">
-            <div>HASHRATE</div>
+            <div>STATS</div>
         </div>
-		<div onclick="showScreen('main-screen')">
+		<div onclick="showScreen('main-screen')" class ="active">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg" alt="PLAY">
             <div>PLAY</div>
         </div>
@@ -741,15 +754,23 @@
             e.preventDefault();
         });
 
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-		
-    removeAllClickTexts();
-
-        }
+function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.remove('active');
+        });
+        document.getElementById(screenId).classList.add('active');
+        
+        document.querySelectorAll('.nav div').forEach(navItem => {
+            navItem.classList.remove('active');
+        });
+        document.querySelector(`.nav div[onclick="showScreen('${screenId}')"]`).classList.add('active');
+    
+	
+	  document.addEventListener('DOMContentLoaded', function() {
+        showScreen('main-screen');
+    });
+	
+	}
 		
 		
 	function showInfo(type) {
