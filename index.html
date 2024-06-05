@@ -508,6 +508,12 @@
     </div>
     <div class="balance">0.00000 $INV</div>
 
+	<div id="ton-connect" class="connect-button"></div>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+	<script src="script.js"></script>
+	
+	
+
 <div id="main-screen" class="screen active">
 <div id="click-text" class="click-text"></div>
     <div class="coin-container">
@@ -638,16 +644,15 @@
         <div class="profile-info">
             <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile Picture">
             <h2>John Doe</h2>
-            <p>Email: johndoe@example.com</p>
-            <p>Location: New York City</p>
-            <p>Total Invested: $5000</p>
+			<p>Status: Inactive</p>
             <p>Shares Owned: 100</p>
-            <p>Crypto Mined: 5 BTC</p>
-            <p>Wallet Address: 0x1234...5678</p>
+            <p>Crypto Mined: 5 $INV</p>
+			<p>Crypto Burned: 1.02 $INV</p>
+			<p></p>
+           
         </div>
         <div class="profile-actions">
-            <button>Update Profile</button>
-            <button>Logout</button>
+
         </div>
     </div>
 </div>
@@ -684,9 +689,7 @@
 
 
     </div>
-<div id="ton-connect" class="connect-button"></div>
-    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-	<script src="script.js"></script>
+
     <script>
         document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
