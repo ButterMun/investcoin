@@ -988,12 +988,15 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Все изображения уже загружены!');
         completeLoading();
         clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
-    } else {
+    
+	
+	} else {
+	
         setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
             loadingText.textContent = 'Something went wrong 😨 Page will be reloaded!';
             timeoutID = setTimeout(() => {
-                location.reload();
+               
             }, 5000);
         }, 15000);
     }
