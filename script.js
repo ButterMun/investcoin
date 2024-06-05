@@ -6,7 +6,7 @@ async function connectToWallet() {
         manifestUrl: 'https://buttermun.github.io/investcoin/tonconnect-manifest.json',
         buttonRootId: 'ton-connect',
         uiOptions: {
-           // twaReturnUrl: 'https://t.me/tonopolygame_bot'
+           twaReturnUrl: 'https://t.me/InvestWorldTest_bot'
         }
     });
 
