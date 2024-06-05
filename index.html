@@ -984,23 +984,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    if (allImagesLoaded) {
-        console.log('Все изображения уже загружены!');
-        completeLoading();
-        clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
-    
-	
-	} else {
-	
-        setTimeout(() => {
-            const loadingText = document.querySelector('.loading-text');
-            loadingText.textContent = 'Something went wrong 😨 Page will be reloaded!';
-            timeoutID = setTimeout(() => {
-               
-            }, 5000);
-        }, 15000);
-    }
-
     function checkAllImagesLoaded() {
         allImagesLoaded = true;
         images.forEach(image => {
@@ -1029,7 +1012,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         }, 0);
     }
+
+    if (allImagesLoaded) {
+        console.log('Все изображения уже загружены!');
+        completeLoading();
+        clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
+    } else {
+        setTimeout(() => {
+            const loadingText = document.querySelector('.loading-text');
+            loadingText.textContent = 'Something went wrong 😨 Page will be reloaded!';
+            timeoutID = setTimeout(() => {
+                location.reload();
+            }, 5000);
+        }, 15000);
+    }
 });
+
 
 
 
