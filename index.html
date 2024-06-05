@@ -1023,6 +1023,12 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingOverlay.style.display = 'none';
         }, 1000);
     }
+	
+	// Заполняем прогресс-бар до 100%, если все изображения уже загружены
+    if (loadedImages === totalImages) {
+        const progressBar = document.querySelector('.progress-bar div');
+        progressBar.style.width = '100%';
+    }
 });
 
 
