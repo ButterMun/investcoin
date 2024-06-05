@@ -971,54 +971,42 @@ function removeAllClickTexts() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('img');
-    let allImagesLoaded = true;
+    const totalImages = images.length;
+    let loadedImages = 0;
     let timeoutID;
 
     images.forEach(image => {
-        if (!image.complete) {
-            allImagesLoaded = false;
+        if (image.complete) {
+            loadedImages++;
+        } else {
+            image.addEventListener('load', () => {
+                loadedImages++;
+                updateLoadingProgress();
+            });
         }
-        image.addEventListener('load', () => {
-            console.log(`Изображение ${image.src} загружено!`);
-            checkAllImagesLoaded();
-        });
     });
 
-    function checkAllImagesLoaded() {
-        allImagesLoaded = true;
-        images.forEach(image => {
-            if (!image.complete) {
-                allImagesLoaded = false;
-            }
-        });
+    function updateLoadingProgress() {
+        const loadingText = document.querySelector('.loading-text');
+        const progressBar = document.querySelector('.progress-bar div');
+        const progressFraction = loadedImages / totalImages;
 
-        if (allImagesLoaded) {
-            console.log('Все изображения загружены!');
+        progressBar.style.width = `${progressFraction * 100}%`;
+
+        loadingText.textContent = `${loadedImages} / ${totalImages}`;
+
+        if (loadedImages === totalImages) {
             completeLoading();
             clearTimeout(timeoutID); // Очистить таймаут, если все изображения загружены
         }
     }
 
-    function completeLoading() {
-        const progressBar = document.querySelector('.progress-bar div');
-        progressBar.style.width = '100%';
-
-        setTimeout(() => {
-            const loadingOverlay = document.getElementById('loading-overlay');
-            loadingOverlay.style.transition = 'opacity 1s';
-            loadingOverlay.style.opacity = 0;
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 1000);
-        }, 0);
-    }
-
-    if (allImagesLoaded) {
+    if (loadedImages === totalImages) {
         console.log('Все изображения уже загружены!');
         completeLoading();
         clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
     } else {
-        setTimeout(() => {
+        timeoutID = setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
             loadingText.textContent = 'Something went wrong 😨 Page will be reloaded!';
             timeoutID = setTimeout(() => {
@@ -1026,7 +1014,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 5000);
         }, 15000);
     }
+
+    function completeLoading() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        loadingOverlay.style.transition = 'opacity 1s';
+        loadingOverlay.style.opacity = 0;
+        setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+        }, 1000);
+    }
 });
+
+
 
 
 
