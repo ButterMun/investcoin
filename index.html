@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>InvestCoin</title>
+    <title>InvestHub</title>
     <style>
         body {
             font-family: Roboto, sans-serif;
@@ -912,18 +912,66 @@ function removeAllClickTexts() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-            const progressBar = document.querySelector('.progress-bar div');
-            progressBar.style.width = '100%';
+    const images = document.querySelectorAll('img');
+    let allImagesLoaded = true;
+    let timeoutID;
 
-            setTimeout(() => {
-                const loadingOverlay = document.getElementById('loading-overlay');
-                loadingOverlay.style.transition = 'opacity 1s';
-                loadingOverlay.style.opacity = 0;
-                setTimeout(() => {
-                    loadingOverlay.style.display = 'none';
-                }, 1000);
-            }, 2500);
+    images.forEach(image => {
+        if (!image.complete) {
+            allImagesLoaded = false;
+        }
+        image.addEventListener('load', () => {
+            console.log(`Изображение ${image.src} загружено!`);
+            checkAllImagesLoaded();
         });
+    });
+
+    if (allImagesLoaded) {
+        console.log('Все изображения уже загружены!');
+        completeLoading();
+    } else {
+        timeoutID = setTimeout(() => {
+            const loadingText = document.querySelector('.loading-text');
+            loadingText.textContent = 'Something went wrong 😨 Page will be reloaded!';
+            setTimeout(() => {
+                location.reload();
+            }, 5000);
+        }, 10000);
+    }
+
+    function checkAllImagesLoaded() {
+        allImagesLoaded = true;
+        images.forEach(image => {
+            if (!image.complete) {
+                allImagesLoaded = false;
+            }
+        });
+
+        if (allImagesLoaded) {
+            console.log('Все изображения загружены!');
+            completeLoading();
+            clearTimeout(timeoutID); // Очистить таймаут, если все изображения загружены
+        }
+    }
+
+    function completeLoading() {
+        const progressBar = document.querySelector('.progress-bar div');
+        progressBar.style.width = '100%';
+
+        setTimeout(() => {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.transition = 'opacity 1s';
+            loadingOverlay.style.opacity = 0;
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 1000);
+        }, 0);
+    }
+});
+
+
+
+
 
 		
     </script>
