@@ -689,6 +689,13 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 	bottom: 0%;
 	}
 	
+	.logo{
+	position: fixed;
+	top: -5%;
+	transform: scale(0.5);
+	
+	}
+	
 	
 	@media screen and (max-height: 670px) {
     .coin-container {
@@ -712,6 +719,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 </head>
 <body>
  <div id="loading-overlay" class="loading-overlay">
+  <img class="logo" src="investhub.jpg" alt="logo">
+
         Loading
         <div class="progress-bar">
             <div></div>
@@ -1110,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         timeoutID = setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
-            loadingText.textContent = 'Something went wrong 😨 <br> Wait or update the page...';
+            loadingText.innerHTML = 'Something went wrong 😨<br>Wait or update the page...';
             timeoutID = setTimeout(() => {
             }, 5000);
         }, 15000);
