@@ -298,9 +298,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 
-.modal.show + .modal-background {
-    display: block; /* Показать фон только когда окно открыто */
-}
+
 
 
 .ok-button {
@@ -354,19 +352,30 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .modal-background {
-    position: fixed; /* Изменено с absolute на fixed */
+    position: fixed;
     top: -100%;
     left: -100%;
-    width: 400vw; /* изменено на 100vw */
-    height: 400vh; /* изменено на 100vh */
-    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный цвет */
+    width: 400vw;
+    height: 400vh;
+    background-color: rgba(0, 0, 0, 0); /* Изначально нулевая прозрачность */
     z-index: 999; /* Выше, чем остальные элементы, но ниже, чем модальное окно */
     display: none; /* Сначала скрыто */
 }
 
 .modal.show + .modal-background {
     display: block; /* Показать фон только когда окно открыто */
+    animation: fadeIn 0.5s ease forwards; /* Запускаем анимацию появления */
 }
+
+@keyframes fadeIn {
+    0% {
+        background-color: rgba(0, 0, 0, 0); /* Начальное значение прозрачности */
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.5); /* Конечное значение прозрачности */
+    }
+}
+
 
 .profile-info p {
     margin-bottom: -15px; /* Нижний отступ только для абзацев */
