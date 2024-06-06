@@ -158,7 +158,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%; /* Ширина подсветки */
+    width: 85%; /* Ширина подсветки */
     height: 100%;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
@@ -368,6 +368,11 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     display: block; /* Показать фон только когда окно открыто */
 }
 
+.profile-info p {
+    margin-bottom: -15px; /* Нижний отступ только для абзацев */
+}
+
+
 .profile-container {
     display: flex;
     flex-direction: column;
@@ -375,20 +380,20 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     justify-content: center;
     text-align: center;
     height: 100%;
+	
 }
 
-.profile-info {
-    margin-bottom: 20px;
-}
+
 
 .profile-info h3{
 	font-size: 0.8em;
-	margin-bottom: 20px;
+	margin-bottom: -5px;
 	margin-top: -20px;
 }
 
 .profile-info canvas {
     margin-top: 20px;
+	margin-bottom: -20px;
 }
 
 
@@ -461,10 +466,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 button {
     font-family: "Roboto Slab", serif;
     font-weight: 900;
-    font-size: 1em;
     color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
     user-select: none; /* Disable text selection */
@@ -975,14 +978,16 @@ function showScreen(screenId) {
 
     let infoText = '';
     if (type === 'mined') {
-        infoText = "Tokens are mined through a process called proof of work, where powerful computers solve complex mathematical problems to validate transactions and create new blocks on the blockchain.";
-    } else if (type === 'spent') {
-        infoText = "Tokens are spent when users perform transactions, such as buying goods or services, transferring funds, or participating in decentralized finance (DeFi) activities.";
-    } else if (type === 'halving') {
-        infoText = "Token halving is a mechanism in which the mining reward for each block is reduced by half approximately every four years. This is designed to control inflation and gradually decrease the token supply over time.";
-    } else {
-        infoText = "InvestCoin is a limited-supply cryptocurrency with a fixed maximum supply. The mining reward halves every four years, making it increasingly scarce over time.";
-    }
+    infoText = "InvestCoins are mined through an innovative process that involves users actively engaging with the platform. By tapping the screen and making strategic investments, users can earn InvestCoins.";
+} else if (type === 'spent') {
+    infoText = "InvestCoins are spent when users engage in transactions within the InvestHub ecosystem. This includes purchasing assets, transferring funds to other users, or participating in various investment opportunities provided by the platform.";
+} else if (type === 'halving') {
+    infoText = "InvestCoin halving is a crucial mechanism designed to reduce the mining reward by half. This strategic reduction controls inflation and gradually decreases the supply of new InvestCoins, increasing their scarcity and potential value over time.";
+} else {
+    infoText = "InvestCoin is a limited-supply cryptocurrency built on the TON platform. With a fixed maximum supply and a halving event every four years, InvestCoin becomes increasingly scarce, enhancing its value and investment appeal within the InvestHub ecosystem.";
+}
+
+
 
     modalContent.innerHTML = `<p>${infoText}</p><button onclick="hideInfo()" class="ok-button">OK</button>`;
 
