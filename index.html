@@ -681,7 +681,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 	
 	.loading-text{
 	font-size: 0.5em;
+	}
 	
+	.version{
+	font-size: 0.5em;
+	position: fixed;
+	bottom: 0%;
 	}
 	
 	
@@ -712,6 +717,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             <div></div>
         </div>
 		<p class="loading-text">Please wait 😊</p>
+		<p class="version">v 0.001</p>
     </div>
     <div class="background">
         <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" style="top:10%;left:20%;animation-duration:18s;">
@@ -1104,7 +1110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         timeoutID = setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
-            loadingText.textContent = 'Something went wrong 😨 Wait or update the page';
+            loadingText.textContent = 'Something went wrong 😨 <br> Wait or update the page...';
             timeoutID = setTimeout(() => {
             }, 5000);
         }, 15000);
