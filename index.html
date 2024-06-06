@@ -1029,6 +1029,8 @@ function showRiskLevel(level) {
         document.querySelector('.tab.' + level).classList.add('active');
     }
 
+/* coin click*/
+
 
 const coins = document.querySelectorAll('.coin');
 
@@ -1056,7 +1058,7 @@ function showClickText(event) {
 
     setTimeout(() => {
         clickText.classList.add('fade-in-text');
-    }, 10);
+    }, 0);
 
     setTimeout(() => {
         clickText.classList.add('fade-out-text');
@@ -1064,7 +1066,7 @@ function showClickText(event) {
 
     setTimeout(() => {
         clickText.remove();
-    }, 1500);
+    }, 1000);
 }
 
 
@@ -1073,6 +1075,8 @@ function removeAllClickTexts() {
     const clickTexts = document.querySelectorAll('.click-text');
     clickTexts.forEach(clickText => clickText.remove());
 }
+
+/*loading*/
 
 document.addEventListener('DOMContentLoaded', function() {
   
