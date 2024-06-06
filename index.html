@@ -63,7 +63,7 @@
         .balance {
             font-size: 2em;
             margin-top: 20px;
-            color: #fff;
+            color: #ffeb3b;
             padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -310,7 +310,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.1s;
+    c
     display: block;
     margin: 0 auto;
 	font-size: 20px;
@@ -446,22 +446,39 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .earnings-info button {
-    padding: 10px 10px;
+    padding: 10px 20px;
     background: #ff9800;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: transform 0.1s;
     display: block;
     margin: 0 auto;
-	font-size: 1em;
+	font-size: 1.2em;
 }
+
+button {
+    font-family: "Roboto Slab", serif;
+    font-weight: 900;
+    font-size: 1em;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    user-select: none; /* Disable text selection */
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
 
 /* invest */
 .tabs {
     position: fixed;
-    top: 15vh; /* Задаем смещение от верхнего края экрана */
+    top: 20vh; /* Задаем смещение от верхнего края экрана */
 	
 	background: rgba(255, 156,0, 0.2);
 border-radius: 16px;
@@ -491,7 +508,6 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     border-radius: 0px;
     cursor: pointer;
     transition: transform 0.1s;
-    font-weight: bold;
 	border: none;
 	position: relative;
 }
@@ -584,12 +600,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .energy-bar progress::-webkit-progress-value {
-    background-color: #0080ff;
+    background-color: #ff9800;
     border-radius: 5px;
 }
 
 .energy-bar progress::-moz-progress-bar {
-    background-color: #0080ff;
+    background-color: #ff9800;
     border-radius: 5px;
 }
 
@@ -788,8 +804,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             <!-- Добавьте других друзей здесь -->
         </div>
         <div class="earnings-info">
-            <p>Total Earned: 50.00000 $INV</p>
-            <button>Claim Earnings</button>
+            <p>Tokens Earned: 50.00000 $INV</p>
+            <button>Claim </button>
         </div>
     </div>
 </div>
@@ -1147,7 +1163,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         context.fillStyle = colours[colourIndex];
         context.fillRect(0, 0, canvas.width, canvas.height);
-        context.font = "48px Arial"; // Adjust font size for smaller canvas
+        context.font = "48px Roboto"; // Adjust font size for smaller canvas
         context.textAlign = "center";
         context.fillStyle = "#FFF";
         context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
