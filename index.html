@@ -388,7 +388,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 
 
 .profile-info p {
-    margin-bottom: -15px; /* Нижний отступ только для абзацев */
+    margin-bottom: -10px; /* Нижний отступ только для абзацев */
 }
 
 #user-icon.pressed {
@@ -507,7 +507,7 @@ button:active {
 /* invest */
 .tabs {
     position: fixed;
-    top: 20vh; /* Задаем смещение от верхнего края экрана */
+    top: 15vh; /* Задаем смещение от верхнего края экрана */
 	
 	background: rgba(255, 156,0, 0.2);
 border-radius: 16px;
@@ -560,15 +560,6 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 .tab.active {
     background-color: #ffeb3b;
     color: black;
-}
-
-
-
-
-
-
-.investment-options {
-    text-align: center;
 }
 
 .risk-level {
@@ -742,7 +733,80 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 
+/* INVEST CARD */
 
+.investment-options-container {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.investment-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.investment-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px auto; /* Центрируем карточки по горизонтали */
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+
+    /* glass */
+    background: rgba(255, 255, 255, 0);
+    border-radius: 20px;
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.investment-card:hover {
+    transform: scale(1.05);
+}
+
+.investment-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+	border-radius: 10%;
+}
+
+.investment-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.investment-details h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.investment-details p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+}
+
+.risk-text {
+    text-align: center; /* Центрирование текста */
+}
+
+.investment-details .expected-return {
+    font-size: 0.8em;
+	font-weight: bold;
+}
 		
     </style>
 </head>
@@ -797,26 +861,96 @@ border: 1px solid rgba(255, 255, 255, 0.11);
         <button class="tab" onclick="showRiskLevel('medium')">Medium Risk</button>
         <button class="tab" onclick="showRiskLevel('high')">High Risk</button>
     </div>
-    <div class="investment-options">
-        <!-- Здесь будут показаны варианты инвестиций -->
-        <div id="low-risk" class="risk-level active">
-            <h2>Low Risk Investments</h2>
-            <p>These investments offer lower returns but are less likely to lose value.</p>
-            <!-- Добавьте варианты инвестиций с низким риском -->
-        </div>
-        <div id="medium-risk" class="risk-level" style="display: none;">
-            <h2>Medium Risk Investments</h2>
-            <p>These investments offer moderate returns with some level of risk.</p>
-            <!-- Добавьте варианты инвестиций с средним риском -->
-        </div>
-        <div id="high-risk" class="risk-level" style="display: none;">
-            <h2>High Risk Investments</h2>
-            <p>These investments offer potentially high returns but come with significant risk.</p>
-            <!-- Добавьте варианты инвестиций с высоким риском -->
+    <div class="investment-options-container">
+        <div class="investment-options">
+            <!-- Варианты инвестиций -->
+            <div id="low-risk" class="risk-level active">
+                <p class="risk-text">Low risk investments offer lower returns but are less likely to lose value.</p>
+                <!-- Варианты инвестиций с низким риском -->
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="InvestSafe Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>InvestSafe</h3>
+                        <p>Invest in a fund that offers a stable return on investment.</p>
+                        <p class="expected-return">Expected Returns: 1%</p>
+                    </div>
+                </div>
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="BondMaster Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>BondMaster</h3>
+                        <p>Invest in a portfolio of high-quality bonds for steady returns.</p>
+                        <p class="expected-return">Expected Returns: 3%</p>
+                    </div>
+                </div>
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="BlueChip Capital Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>BlueChip Capital</h3>
+                        <p>Invest in established companies with a track record of stability.</p>
+                        <p class="expected-return">Expected Returns: 4%</p>
+                    </div>
+                </div>
+            </div>
+            <div id="medium-risk" class="risk-level" style="display: none;">
+                <p class="risk-text">Medium risk investments offer moderate returns with some level of risk.</p>
+                <!-- Варианты инвестиций с средним риском -->
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="GrowthMax Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>GrowthMax</h3>
+                        <p>Invest in a fund that targets growth stocks and corporate bonds with moderate risk.</p>
+                        <p class="expected-return">Expected Returns: 6%</p>
+                    </div>
+                </div>
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="EquityBoost Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>EquityBoost</h3>
+                        <p>Invest in a mix of stocks with growth potential.</p>
+                        <p class="expected-return">Expected Returns: 7%</p>
+                    </div>
+                </div>
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="CorporateGains Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>CorporateGains</h3>
+                        <p>Invest in bonds issued by reliable corporations for better returns.</p>
+                        <p class="expected-return">Expected Returns: 5%</p>
+                    </div>
+                </div>
+            </div>
+            <div id="high-risk" class="risk-level" style="display: none;">
+                <p class="risk-text">High risk investments offer potentially high returns but come with significant risk.</p>
+                <!-- Варианты инвестиций с высоким риском -->
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="VentureX Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>VentureX</h3>
+                        <p>Invest in early-stage startups with high growth potential but also high risk of failure.</p>
+                        <p class="expected-return">Expected Returns: 10%</p>
+                    </div>
+                </div>
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="CryptoGrowth Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>CryptoGrowth</h3>
+                        <p>Invest in volatile digital currencies for high returns.</p>
+                        <p class="expected-return">Expected Returns: 12%</p>
+                    </div>
+                </div>
+                <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>TechVentures</h3>
+                        <p>Invest in new tech companies with potential for high growth.</p>
+                        <p class="expected-return">Expected Returns: 8%</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 
 
 
