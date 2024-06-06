@@ -156,10 +156,11 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 .nav div.active::before {
     content: '';
     position: absolute;
+    top: 50%; /* Позиционирование сверху на 50% */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%); /* Смещение на 50% по горизонтали и вертикали */
     width: 85%; /* Ширина подсветки */
-    height: 100%;
+    height: 110%; /* Высота подсветки, можно регулировать по необходимости */
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
     border-radius: 10px;
@@ -227,6 +228,15 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+.card.pressed {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in-out;
+}
+.card {
+    transition: transform 0.1s ease-in-out;
 }
 
 
@@ -381,6 +391,13 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     margin-bottom: -15px; /* Нижний отступ только для абзацев */
 }
 
+#user-icon.pressed {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in-out;
+}
+#user-icon {
+    transition: transform 0.1s ease-in-out;
+}
 
 .profile-container {
     display: flex;
@@ -891,7 +908,6 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             <p>Crypto Mined: 5 $INV</p>
 			<p>Crypto Burned: 1.02 $INV</p>
 			<p></p>
-           
         </div>
         <div class="profile-actions">
 
@@ -912,8 +928,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             <div>STATS</div>
         </div>
 		<div onclick="showScreen('main-screen')" class ="active">
-            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg" alt="PLAY">
-            <div>PLAY</div>
+            <img src="https://twemoji.maxcdn.com/v/latest/svg/26cf.svg" alt="MINE">
+        <div>MINE</div>
         </div>
 		<div onclick="showScreen('friends-screen')">
             <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
@@ -1206,7 +1222,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+let userIcon = document.getElementById('user-icon');
+userIcon.addEventListener('mousedown', function() {
+    userIcon.classList.add('pressed');
+    setTimeout(function() {
+        userIcon.classList.remove('pressed');
+    }, 100);
+});
 
+let cardIcons = document.querySelectorAll('.card');
+
+cardIcons.forEach(cardIcon => {
+    cardIcon.addEventListener('mousedown', function() {
+        cardIcon.classList.add('pressed');
+        setTimeout(function() {
+            cardIcon.classList.remove('pressed');
+        }, 100);
+    });
+});
 
 
 
