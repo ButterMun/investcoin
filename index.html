@@ -554,13 +554,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 
-.tab:hover {
-    transform: scale(1.05);
-}
-
 .tab.active {
     background-color: #ffeb3b;
-    color: black;
+	transform: scale(1.05);
+    border-radius: 16px;
+    background-color: rgba(255, 235, 59, 0.3); /* Легкая подсветка активной вкладки */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Внутренняя тень для подсветки */
 }
 
 .risk-level {
@@ -732,7 +731,6 @@ border: 1px solid rgba(255, 255, 255, 0.11);
  
 }
 
-
 /* INVEST CARD */
 
 .investment-options-container {
@@ -860,9 +858,9 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 
 <div id="invest-screen" class="screen">
     <div class="tabs">
-        <button class="tab" onclick="showRiskLevel('low')">Low Risk</button>
-        <button class="tab" onclick="showRiskLevel('medium')">Medium Risk</button>
-        <button class="tab" onclick="showRiskLevel('high')">High Risk</button>
+        <button class="tab low active" onclick="showRiskLevel('low')">Low Risk</button>
+        <button class="tab medium" onclick="showRiskLevel('medium')">Medium Risk</button>
+        <button class="tab high" onclick="showRiskLevel('high')">High Risk</button>
     </div>
     <div class="investment-options-container">
         <div class="investment-options">
@@ -1181,22 +1179,20 @@ function hideInfo() {
 
 
 function showRiskLevel(level) {
-        // Сначала скрываем все уровни риска
-        document.querySelectorAll('.risk-level').forEach(function(levelElement) {
-            levelElement.style.display = 'none';
-        });
+    // Сначала скрываем все уровни риска
+    document.querySelectorAll('.risk-level').forEach(function(levelElement) {
+        levelElement.style.display = 'none';
+    });
 
-        // Затем показываем выбранный уровень риска
-        document.getElementById(level + '-risk').style.display = 'block';
-        
-        // Делаем выбранную кнопку активной, а остальные неактивными
-        document.querySelectorAll('.tab').forEach(function(tab) {
-            tab.classList.remove('active');
-        });
-        document.querySelector('.tab.active').classList.remove('active');
-        document.querySelector('.tab.' + level).classList.add('active');
-    }
-
+    // Затем показываем выбранный уровень риска
+    document.getElementById(level + '-risk').style.display = 'block';
+    
+    // Делаем выбранную кнопку активной, а остальные неактивными
+    document.querySelectorAll('.tab').forEach(function(tab) {
+        tab.classList.remove('active');
+    });
+    document.querySelector('.tab.' + level).classList.add('active');
+}
 /* coin click*/
 
 
