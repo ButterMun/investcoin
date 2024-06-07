@@ -1106,7 +1106,7 @@
             <div class="friends-list" id="friends-list">
                 <!-- Friends will be listed here -->
             </div>
-            <div class="no-friends" id="no-friends">No friends yet</div>
+           
             <div class="friend-count" id="friend-count">0 Friends</div>
             <div class="earnings-info">
                 <p>Tokens Earned: 50.00000 $INV</p>
@@ -1210,6 +1210,19 @@
         document.addEventListener('DOMContentLoaded', function() {
           showScreen('main-screen');
         });
+		
+
+    const friendsList = document.querySelector('.friends-list');
+        friendsList.scrollTop = 0;
+		
+
+const cardsLists = document.querySelectorAll('.investment-cards-wrapper');
+
+cardsLists.forEach(cardsList => {
+    cardsList.scrollTop = 0;
+});
+		
+		
       }
 
       function showInfo(type) {
@@ -1457,6 +1470,8 @@
                 noFriendsText.style.display = 'none';
             }
         }
+		
+		// <div class="no-friends" id="no-friends">No friends yet</div>
 
         const friendsData = [
             { img: 'https://randomuser.me/api/portraits/women/1.jpg', name: 'Friend 1' },
@@ -1490,6 +1505,8 @@
         });
 
         document.addEventListener('DOMContentLoaded', checkFriends);
+		
+		
     </script>
   </body>
 </html>
