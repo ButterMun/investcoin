@@ -707,11 +707,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 
 .investment-options-container {
     width: 90%;
-    position: absolute;
-    top: 54%;
+    position: fixed;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
+    margin-top: 50px; /* Fixed margin from the .tabs */
 }
+
 
 .investment-options {
     display: flex;
@@ -720,6 +721,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
     width: 100%;
 }
 
+.investment-cards-wrapper {
+    overflow-y: auto; /* Allow scrolling */
+    max-height: calc(100vh - 400px); /* Adjust height to fit within viewport and show all cards */
+    width: 100%;
+    padding-bottom: 100px; /* Add padding to the bottom to ensure the last card is visible */
+}
 
 .investment-card {
     border: 1px solid #ccc;
@@ -772,8 +779,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 .risk-text {
     text-align: center; /* Центрирование текста */
 	font-size: 0.9em;
-	margin-top: 10px;
-	margin-bottom: 0px;
+	
 }
 
 .investment-details .expected-return {
@@ -898,7 +904,8 @@ border: 1px solid rgba(255, 255, 255, 0.11);
             <div id="low-risk" class="risk-level active">
                 <p class="risk-text">Low risk investments offer lower returns but are less likely to lose value.</p>
                 <!-- Варианты инвестиций с низким риском -->
-                <div class="investment-card">
+                <div class="investment-cards-wrapper">
+				<div class="investment-card">
                     <img src="https://via.placeholder.com/50" alt="InvestSafe Logo" class="investment-logo">
                     <div class="investment-details">
                         <h3>InvestSafe</h3>
@@ -922,11 +929,20 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                         <p class="expected-return">Expected Returns: 4%</p>
                     </div>
                 </div>
-				
+				<div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="BlueChip Capital Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>BlueChip Capital</h3>
+                        <p>Invest in established companies with a track record of stability.</p>
+                        <p class="expected-return">Expected Returns: 4%</p>
+                    </div>
+                </div>
+				</div>
             </div>
             <div id="medium-risk" class="risk-level" style="display: none;">
                 <p class="risk-text">Medium risk investments offer moderate returns with some level of risk.</p>
                 <!-- Варианты инвестиций с средним риском -->
+				<div class="investment-cards-wrapper">
                 <div class="investment-card">
                     <img src="https://via.placeholder.com/50" alt="GrowthMax Logo" class="investment-logo">
                     <div class="investment-details">
@@ -951,10 +967,12 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                         <p class="expected-return">Expected Returns: 5%</p>
                     </div>
                 </div>
+				</div>
             </div>
             <div id="high-risk" class="risk-level" style="display: none;">
                 <p class="risk-text">High risk investments offer potentially high returns but come with significant risk.</p>
                 <!-- Варианты инвестиций с высоким риском -->
+				<div class="investment-cards-wrapper">
                 <div class="investment-card">
                     <img src="https://via.placeholder.com/50" alt="VentureX Logo" class="investment-logo">
                     <div class="investment-details">
@@ -980,6 +998,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                     </div>
                 </div>
             </div>
+			</div>
         </div>
     </div>
 </div>
