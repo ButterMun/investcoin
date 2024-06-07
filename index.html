@@ -1304,7 +1304,7 @@ cardsLists.forEach(cardsList => {
         return currentIndex > targetIndex ? 'left' : 'right';
       }
       /* coin click*/
-      const coins = document.querySelectorAll('.coin');
+   const coins = document.querySelectorAll('.coin');
 coins.forEach(coin => {
     coin.addEventListener('click', showClickText);
     coin.addEventListener('touchstart', showClickText);
@@ -1326,8 +1326,8 @@ function showClickText(event) {
         clickText.classList.add('click-text');
         clickText.innerHTML = '+0.001';
         document.body.appendChild(clickText);
-        const clickX = touch.clientX;
-        const clickY = touch.clientY;
+        const clickX = touch.pageX; // Изменено на pageX
+        const clickY = touch.pageY; // Изменено на pageY
         clickText.style.left = clickX + 'px';
         clickText.style.top = clickY + 'px';
         setTimeout(() => {
@@ -1341,6 +1341,7 @@ function showClickText(event) {
         }, 1000);
     });
 }
+
       function removeAllClickTexts() {
         const clickTexts = document.querySelectorAll('.click-text');
         clickTexts.forEach(clickText => clickText.remove());
