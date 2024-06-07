@@ -1,659 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	<script src="https://telegram.org/js/telegram-web-app.js"></script>
-	<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
-	
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
     <title>InvestHub</title>
     <style>
-	
-	
-	
-	
-        body {
-           font-family: "Roboto Slab", serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            height: 100vh;
-            background-color: #121212;
-            overflow: hidden;
-            user-select: none; /* Disable text selection */
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            background: rgb(18,18,18);
-            background: linear-gradient(180deg, rgba(18,18,18,1) 0%, rgba(50,50,50,1) 100%);
-        }
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .background img {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            opacity: 0.1;
-            animation: float 20s linear infinite;
-            user-select: none; /* Disable text selection */
-        }
-        @keyframes float {
-            from {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            to {
-                transform: translateY(-100vh) rotate(360deg);
-            }
-        }
-        .balance {
-            font-size: 2em;
-            margin-top: 20px;
-            color: #ffeb3b;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            user-select: none; /* Disable text selection */
-			
-/* glass */
-background: rgba(255, 156,0, 0.2);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.11);
-			
-			
-        }
-		
-		
-		@keyframes pulse {
-    0% {
-        filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 0, 0.5));
-    }
-    50% {
-        filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.7)) drop-shadow(0 0 13px rgba(255, 255, 0, 0.7)) drop-shadow(0 0 18px rgba(255, 255, 0, 0.7));
-    }
-    100% {
-        filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 0, 0.5));
-    }
-}
+      body {
+        font-family: "Roboto Slab", serif;
+        font-optical-sizing: auto;
+        font-weight: 900;
+        font-style: normal;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        background-color: #121212;
+        overflow: hidden;
+        user-select: none;
+        /* Disable text selection */
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        background: rgb(18, 18, 18);
+        background: linear-gradient(180deg, rgba(18, 18, 18, 1) 0%, rgba(50, 50, 50, 1) 100%);
+      }
 
-.coin {
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
 
-}
-		
-        
-        .coin {
-            width: 250px;
-            height: 250px;
-            cursor: pointer;
-            transition: transform 0.09s;
-            user-select: none; /* Disable text selection */
-			    animation: pulse 10s infinite;
-			}
-        .coin:active {
-            transform: scale(0.9);
-        }
-.nav {
-    display: flex;
-    justify-content: space-around;
-    width: 98%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
-    position: fixed;
-    bottom: 2%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    box-sizing: border-box;
-    user-select: none; /* Disable text selection */
-	max-width: 500px;
-    
-    /* glass */
-    border-radius: 20px;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.11);
-}
+      .background img {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        opacity: 0.1;
+        animation: float 20s linear infinite;
+        user-select: none;
+        /* Disable text selection */
+      }
 
-.nav div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1em;
-    color: #ffeb3b;
-    position: relative;
-    flex: 1;
-    transition: transform 0.1s;
-    cursor: pointer;
-    user-select: none; /* Disable text selection */
-}
-
-.nav div:active {
-    transform: scale(0.9);
-}
-
-.nav div.active {
-    position: relative;
-}
-
-.nav div.active::before {
-    content: '';
-    position: absolute;
-    top: 50%; /* Позиционирование сверху на 50% */
-    left: 50%;
-    transform: translate(-50%, -50%); /* Смещение на 50% по горизонтали и вертикали */
-    width: 85%; /* Ширина подсветки */
-    height: 110%; /* Высота подсветки, можно регулировать по необходимости */
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
-    border-radius: 10px;
-    z-index: -1;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-		
-        .nav div img {
-            width: 30px;
-            height: 30px;
-            user-select: none; /* Disable text selection */
-        }
-        .nav div:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 10%;
-            bottom: 10%;
-            width: 1px;
-            background-color: #333;
-            user-select: none; /* Disable text selection */
+      @keyframes float {
+        from {
+          transform: translateY(100vh) rotate(0deg);
         }
 
-		
-/* Center the cards vertically and horizontally */
+        to {
+          transform: translateY(-100vh) rotate(360deg);
+        }
+      }
 
-.card {
-    background: #333;
-    color: #fff;
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 10px;
-    width: 80%;  /* Change to a percentage for responsive design */
-    max-width: 500px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    user-select: none; /* Disable text selection */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+      .balance {
+        font-size: 2em;
+        margin-top: 20px;
+        color: #ffeb3b;
+        padding: 10px 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        user-select: none;
+        /* Disable text selection */
+        /* glass */
+        background: rgba(255, 156, 0, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
 
+      @keyframes pulse {
+        0% {
+          filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 0, 0.5));
+        }
 
-.card.pressed {
-    transform: scale(0.95);
-    transition: transform 0.1s ease-in-out;
-}
-.card {
-    transition: transform 0.1s ease-in-out;
-}
+        50% {
+          filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.7)) drop-shadow(0 0 13px rgba(255, 255, 0, 0.7)) drop-shadow(0 0 18px rgba(255, 255, 0, 0.7));
+        }
 
+        100% {
+          filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 0, 0.5));
+        }
+      }
 
-.glass-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    padding: 20px;
-    width: 80%;  /* Изменить на процент для адаптивного дизайна */
-    max-width: 500px;
-    user-select: none; /* Отключить выделение текста */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* glass */
-    background: rgba(255, 255, 255, 0);
-    border-radius: 20px;
-    backdrop-filter: blur(7.4px);
-    -webkit-backdrop-filter: blur(7.4px);
-    border: 1px solid rgba(255, 255, 255, 0.11);
+      .coin {}
 
-}
+      .coin {
+        width: 250px;
+        height: 250px;
+        cursor: pointer;
+        transition: transform 0.09s;
+        user-select: none;
+        /* Disable text selection */
+        animation: pulse 10s infinite;
+      }
 
-.info-icon {
-    position: fixed;
-    top: 30px;
-    right: 10px;
-    background: #ff9800;
-    color: #fff;
-    font-size: 1.5em;
-    padding: 5px 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-}
+      .coin:active {
+        transform: scale(0.9);
+      }
 
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #333;
-    color: #ffe;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    width: 80%;
-    opacity: 0;  /* Start hidden for animation */
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        width: 98%;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px 0;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+        position: fixed;
+        bottom: 2%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        box-sizing: border-box;
+        user-select: none;
+        /* Disable text selection */
+        max-width: 500px;
+        /* glass */
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
 
-.modal.show {
-    opacity: 1;  /* Make visible */
-    transform: translate(-50%, -50%) scale(1);
-}
+      .nav div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1em;
+        color: #ffeb3b;
+        position: relative;
+        flex: 1;
+        transition: transform 0.1s;
+        cursor: pointer;
+        user-select: none;
+        /* Disable text selection */
+      }
 
-.modal.hide {
-    opacity: 0;  /* Hide */
-    transform: translate(-50%, -50%) scale(0.9);
-}
+      .nav div:active {
+        transform: scale(0.9);
+      }
 
-.modal-content {
-    margin-bottom: 20px;
-    text-align: center;
-}
+      .nav div.active {
+        position: relative;
+      }
 
+      .nav div.active::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        /* Позиционирование сверху на 50% */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* Смещение на 50% по горизонтали и вертикали */
+        width: 85%;
+        /* Ширина подсветки */
+        height: 110%;
+        /* Высота подсветки, можно регулировать по необходимости */
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        border-radius: 10px;
+        z-index: -1;
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
 
+      .nav div img {
+        width: 30px;
+        height: 30px;
+        user-select: none;
+        /* Disable text selection */
+      }
 
+      .nav div:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10%;
+        bottom: 10%;
+        width: 1px;
+        background-color: #333;
+        user-select: none;
+        /* Disable text selection */
+      }
 
+      /* Center the cards vertically and horizontally */
+      .card {
+        background: #333;
+        color: #fff;
+        padding: 20px;
+        margin: 10px 0;
+        border-radius: 10px;
+        width: 80%;
+        /* Change to a percentage for responsive design */
+        max-width: 500px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        user-select: none;
+        /* Disable text selection */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-.ok-button {
-    padding: 10px 20px;
-    background: #ff9800;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    c
-    display: block;
-    margin: 0 auto;
-	font-size: 20px;
-}
+      .card.pressed {
+        transform: scale(0.95);
+        transition: transform 0.1s ease-in-out;
+      }
 
-.ok-button:active {
-    transform: scale(0.9);
-}
+      .card {
+        transition: transform 0.1s ease-in-out;
+      }
 
-.fade-in {
-    animation: fadeInAnimation 0.3s ease forwards;
-    transform: translate(-50%, -50%) scale(0.9); /* Начальное значение масштаба */
-}
+      .glass-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        padding: 20px;
+        width: 80%;
+        /* Изменить на процент для адаптивного дизайна */
+        max-width: 500px;
+        user-select: none;
+        /* Отключить выделение текста */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* glass */
+        background: rgba(255, 255, 255, 0);
+        border-radius: 20px;
+        backdrop-filter: blur(7.4px);
+        -webkit-backdrop-filter: blur(7.4px);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
 
-@keyframes fadeInAnimation {
-    from {
+      .info-icon {
+        position: fixed;
+        top: 30px;
+        right: 10px;
+        background: #ff9800;
+        color: #fff;
+        font-size: 1.5em;
+        padding: 5px 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        color: #ffe;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        width: 80%;
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9); /* Начальное значение масштаба */
-    }
-    to {
+        /* Start hidden for animation */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .modal.show {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1); /* Конечное значение масштаба */
-    }
-}
+        /* Make visible */
+        transform: translate(-50%, -50%) scale(1);
+      }
 
-
-.fade-out {
-    animation: fadeOutAnimation 0.3s ease forwards;
-    transform: translate(-50%, -50%) scale(1); /* Начальное значение масштаба */
-}
-
-@keyframes fadeOutAnimation {
-    from {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1); /* Начальное значение масштаба */
-    }
-    to {
+      .modal.hide {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9); /* Конечное значение масштаба */
-    }
-}
+        /* Hide */
+        transform: translate(-50%, -50%) scale(0.9);
+      }
 
-.modal-background {
-    position: fixed;
-    top: -100%;
-    left: -100%;
-    width: 400vw;
-    height: 400vh;
-    background-color: rgba(0, 0, 0, 0); /* Изначально нулевая прозрачность */
-    z-index: 999; /* Выше, чем остальные элементы, но ниже, чем модальное окно */
-    display: none; /* Сначала скрыто */
-}
+      .modal-content {
+        margin-bottom: 20px;
+        text-align: center;
+      }
 
-.modal.show + .modal-background {
-    display: block; /* Показать фон только когда окно открыто */
-    animation: fadeIn 0.5s ease forwards; /* Запускаем анимацию появления */
-}
+      .ok-button {
+        padding: 10px 20px;
+        background: #ff9800;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        c display: block;
+        margin: 0 auto;
+        font-size: 20px;
+      }
 
-@keyframes fadeIn {
-    0% {
-        background-color: rgba(0, 0, 0, 0); /* Начальное значение прозрачности */
-    }
-    100% {
-        background-color: rgba(0, 0, 0, 0.5); /* Конечное значение прозрачности */
-    }
-}
+      .ok-button:active {
+        transform: scale(0.9);
+      }
 
+      .fade-in {
+        animation: fadeInAnimation 0.3s ease forwards;
+        transform: translate(-50%, -50%) scale(0.9);
+        /* Начальное значение масштаба */
+      }
 
-.profile-info p {
-    margin-bottom: -10px; /* Нижний отступ только для абзацев */
-}
-
-#user-icon.pressed {
-    transform: scale(0.95);
-    transition: transform 0.1s ease-in-out;
-}
-#user-icon {
-    transition: transform 0.1s ease-in-out;
-}
-
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-	
-}
-
-
-
-.profile-info h3{
-	font-size: 0.8em;
-	margin-bottom: -5px;
-	margin-top: -20px;
-}
-
-.profile-info canvas {
-    margin-top: 20px;
-	margin-bottom: -20px;
-}
-
-
-
-.profile-actions {
-    display: flex;
-    justify-content: center;
-}
-
-.profile-actions button {
-    padding: 10px 20px;
-    background: #4CAF50; /* Зеленый цвет */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 10px;
-}
-
-.profile-actions button:hover {
-    background-color: #45a049; /* Темнее зеленый при наведении */
-}
-
-/* friends */
-
-
-.friends-container {
-    text-align: center;
-    
-}
-.friends-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.friend {
-    margin: 10px;
-}
-
-.friend img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-
-.friend p {
-    margin-top: 5px;
-}
-
-.earnings-info {
-    margin-top: 20px;
-}
-
-.earnings-info button {
-    padding: 10px 20px;
-    background: #ff9800;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.1s;
-    display: block;
-    margin: 0 auto;
-	font-size: 1.2em;
-}
-
-button {
-    font-family: "Roboto Slab", serif;
-    font-weight: 900;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-    user-select: none; /* Disable text selection */
-}
-
-button:active {
-    transform: scale(0.9);
-}
-
-
-/* invest */
-.tabs {
-    position: fixed;
-    top: 15vh; /* Задаем смещение от верхнего края экрана */
-	
-	background: rgba(255, 156,0, 0.2);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.11);
-   
-
-}
-
-.tabs .tab:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 10%;
-    bottom: 10%;
-    width: 1px;
-    background-color: #FFFFFF;
-    user-select: none; /* Отключаем выбор текста */
-}
-
-.tab {
-    background-color: rgba(255, 152, 0, 0.0);
-    color: #ffeb3b;
-    padding: 10px 20px;
-    border-radius: 0px;
-    cursor: pointer;
-    transition: transform 0.1s;
-	border: none;
-	position: relative;
-	font-size: 0.9em;
-}
-
-.tabs .tab:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 10%;
-    bottom: 10%;
-    width: 1px;
-    background-color: #333;
-    user-select: none; /* Отключаем выбор текста */
-}
-
-
-.tab.active {
-    background-color: #ffeb3b;
-	transform: scale(1.05);
-    border-radius: 16px;
-    background-color: rgba(255, 235, 59, 0.3); /* Легкая подсветка активной вкладки */
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Внутренняя тень для подсветки */
-}
-
-.risk-level {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 0;
-    transform: translateX(100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.risk-level.active {
-    opacity: 1;
-    transform: translateX(0);
-    position: relative;
-}
-
-.risk-level.inactive-left {
-    opacity: 0;
-    transform: translateX(-100%);
-}
-
-.risk-level.inactive-right {
-    opacity: 0;
-    transform: translateX(100%);
-}
-
-/* main-screen */
-
-
-.coin-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none; /* Disable text selection */
-			position: relative;
-	
-	  position: absolute; /* Используем абсолютное позиционирование */
-    top: 50%; /* Помещаем верхний край на середину экрана */
-    left: 50%; /* Помещаем левый край на середину экрана */
-    transform: translate(-50%, -50%);
-	
-	
-	
+      @keyframes fadeInAnimation {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.9);
+          /* Начальное значение масштаба */
         }
 
-.energy-bar {
-    position: absolute;
-    bottom: -20%;
-    left: 50%; /* Размещаем по центру */
-    transform: translateX(-50%); /* Центрируем относительно родителя */
-    display: flex;
-    align-items: center;
-    margin-top: 10px; /* Заменили margin-bottom на margin-top */
-}
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+          /* Конечное значение масштаба */
+        }
+      }
 
-.energy-bar img {
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
-}
+      .fade-out {
+        animation: fadeOutAnimation 0.3s ease forwards;
+        transform: translate(-50%, -50%) scale(1);
+        /* Начальное значение масштаба */
+      }
 
-.energy-bar progress {
-    width: 150px;
-    height: 20px;
-    -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
-    appearance: none; /* Отключаем стилизацию браузера */
-}
-
-.energy-bar progress::-webkit-progress-bar {
-    background-color: #eee;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.energy-bar progress::-webkit-progress-value {
-    background-color: #ff9800;
-    border-radius: 5px;
-}
-
-.energy-bar progress::-moz-progress-bar {
-    background-color: #ff9800;
-    border-radius: 5px;
-}
-
-.energy-bar span {
-            margin-left: 10px;
-            font-size: 20px; /* Размер шрифта */
+      @keyframes fadeOutAnimation {
+        from {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+          /* Начальное значение масштаба */
         }
 
+        to {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.9);
+          /* Конечное значение масштаба */
+        }
+      }
 
-.click-text {
-    position: absolute; /* Добавлено */
-    color:  #ffeb3b;
-    font-size: 30px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 1s ease, top 1s ease; /* Добавлено transform и top в transition */
-    pointer-events: none;
-    z-index: 100;
-	text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-}
+      .modal-background {
+        position: fixed;
+        top: -100%;
+        left: -100%;
+        width: 400vw;
+        height: 400vh;
+        background-color: rgba(0, 0, 0, 0);
+        /* Изначально нулевая прозрачность */
+        z-index: 999;
+        /* Выше, чем остальные элементы, но ниже, чем модальное окно */
+        display: none;
+        /* Сначала скрыто */
+      }
 
-.fade-in-text {
-    opacity: 1;
-    transform: translateY(0); /* Добавлено */
-    top: calc(50% - 50px); /* Стартовая позиция */
-}
+      .modal.show+.modal-background {
+        display: block;
+        /* Показать фон только когда окно открыто */
+        animation: fadeIn 0.5s ease forwards;
+        /* Запускаем анимацию появления */
+      }
 
-.fade-out-text {
-    opacity: 0;
-    transform: translateY(-50px); /* Добавлено */
-    top: 20px; /* Конечная позиция */
-}
+      @keyframes fadeIn {
+        0% {
+          background-color: rgba(0, 0, 0, 0);
+          /* Начальное значение прозрачности */
+        }
 
+        100% {
+          background-color: rgba(0, 0, 0, 0.5);
+          /* Конечное значение прозрачности */
+        }
+      }
 
-/* loading */
+      .profile-info p {
+        margin-bottom: -10px;
+        /* Нижний отступ только для абзацев */
+      }
 
- .loading-overlay {
+      #user-icon.pressed {
+        transform: scale(0.95);
+        transition: transform 0.1s ease-in-out;
+      }
+
+      #user-icon {
+        transition: transform 0.1s ease-in-out;
+      }
+
+      .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+      }
+
+      .profile-info h3 {
+        font-size: 0.8em;
+        margin-bottom: -5px;
+        margin-top: -20px;
+      }
+
+      .profile-info canvas {
+        margin-top: 20px;
+        margin-bottom: -20px;
+      }
+
+      .profile-actions {
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile-actions button {
+        padding: 10px 20px;
+        background: #4CAF50;
+        /* Зеленый цвет */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-right: 10px;
+      }
+
+      .profile-actions button:hover {
+        background-color: #45a049;
+        /* Темнее зеленый при наведении */
+      }
+
+      /* friends */
+      .friends-container {
+        text-align: center;
+      }
+
+      .friends-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .friend {
+        margin: 10px;
+      }
+
+      .friend img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+
+      .friend p {
+        margin-top: 5px;
+      }
+
+      .earnings-info {
+        margin-top: 20px;
+      }
+
+      .earnings-info button {
+        padding: 10px 20px;
+        background: #ff9800;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s;
+        display: block;
+        margin: 0 auto;
+        font-size: 1.2em;
+      }
+
+      button {
+        font-family: "Roboto Slab", serif;
+        font-weight: 900;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s;
+        user-select: none;
+        /* Disable text selection */
+      }
+
+      button:active {
+        transform: scale(0.9);
+      }
+
+      /* invest */
+      .tabs {
+        position: fixed;
+        top: 15vh;
+        /* Задаем смещение от верхнего края экрана */
+        background: rgba(255, 156, 0, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
+
+      .tabs .tab:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10%;
+        bottom: 10%;
+        width: 1px;
+        background-color: #FFFFFF;
+        user-select: none;
+        /* Отключаем выбор текста */
+      }
+
+      .tab {
+        background-color: rgba(255, 152, 0, 0.0);
+        color: #ffeb3b;
+        padding: 10px 20px;
+        border-radius: 0px;
+        cursor: pointer;
+        transition: transform 0.1s;
+        border: none;
+        position: relative;
+        font-size: 0.9em;
+      }
+
+      .tabs .tab:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10%;
+        bottom: 10%;
+        width: 1px;
+        background-color: #333;
+        user-select: none;
+        /* Отключаем выбор текста */
+      }
+
+      .tab.active {
+        background-color: #ffeb3b;
+        transform: scale(1.05);
+        border-radius: 16px;
+        background-color: rgba(255, 235, 59, 0.3);
+        /* Легкая подсветка активной вкладки */
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        /* Внутренняя тень для подсветки */
+      }
+
+      .risk-level {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 0;
+        transform: translateX(100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .risk-level.active {
+        opacity: 1;
+        transform: translateX(0);
+        position: relative;
+      }
+
+      .risk-level.inactive-left {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      .risk-level.inactive-right {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+
+      /* main-screen */
+      .coin-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        /* Disable text selection */
+        position: relative;
+        position: absolute;
+        /* Используем абсолютное позиционирование */
+        top: 50%;
+        /* Помещаем верхний край на середину экрана */
+        left: 50%;
+        /* Помещаем левый край на середину экрана */
+        transform: translate(-50%, -50%);
+      }
+
+      .energy-bar {
+        position: absolute;
+        bottom: -20%;
+        left: 50%;
+        /* Размещаем по центру */
+        transform: translateX(-50%);
+        /* Центрируем относительно родителя */
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        /* Заменили margin-bottom на margin-top */
+      }
+
+      .energy-bar img {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+      }
+
+      .energy-bar progress {
+        width: 150px;
+        height: 20px;
+        -webkit-appearance: none;
+        /* Отключаем стилизацию браузера для WebKit */
+        appearance: none;
+        /* Отключаем стилизацию браузера */
+      }
+
+      .energy-bar progress::-webkit-progress-bar {
+        background-color: #eee;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .energy-bar progress::-webkit-progress-value {
+        background-color: #ff9800;
+        border-radius: 5px;
+      }
+
+      .energy-bar progress::-moz-progress-bar {
+        background-color: #ff9800;
+        border-radius: 5px;
+      }
+
+      .energy-bar span {
+        margin-left: 10px;
+        font-size: 20px;
+        /* Размер шрифта */
+      }
+
+      .click-text {
+        position: absolute;
+        /* Добавлено */
+        color: #ffeb3b;
+        font-size: 30px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 1s ease, top 1s ease;
+        /* Добавлено transform и top в transition */
+        pointer-events: none;
+        z-index: 100;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+      }
+
+      .fade-in-text {
+        opacity: 1;
+        transform: translateY(0);
+        /* Добавлено */
+        top: calc(50% - 50px);
+        /* Стартовая позиция */
+      }
+
+      .fade-out-text {
+        opacity: 0;
+        transform: translateY(-50px);
+        /* Добавлено */
+        top: 20px;
+        /* Конечная позиция */
+      }
+
+      /* loading */
+      .loading-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -667,832 +694,700 @@ border: 1px solid rgba(255, 255, 255, 0.11);
         z-index: 9999;
         color: #fff;
         font-size: 2em;
-    }
+      }
 
-    .progress-bar {
+      .progress-bar {
         width: 80%;
         height: 20px;
-		max-width: 300px;
+        max-width: 300px;
         background-color: #fff;
         margin-top: 20px;
         border-radius: 10px;
         overflow: hidden;
-		 -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
-    appearance: none; /* Отключаем стилизацию браузера */
-    }
+        -webkit-appearance: none;
+        /* Отключаем стилизацию браузера для WebKit */
+        appearance: none;
+        /* Отключаем стилизацию браузера */
+      }
 
-    .progress-bar div {
+      .progress-bar div {
         height: 100%;
         width: 0;
         background-color: #ff9800;
         border-radius: 10px;
         transition: width 2.5s;
-		 -webkit-appearance: none; /* Отключаем стилизацию браузера для WebKit */
-    appearance: none; /* Отключаем стилизацию браузера */
-    }
-	
-	.loading-text{
-	font-size: 0.5em;
-	}
-	
-	.version{
-	font-size: 0.5em;
-	position: fixed;
-	bottom: 0%;
-	}
-	
-	.logo{
-	position: fixed;
-	top: -2%;
-	transform: scale(0.6);
-	}
-	
-	
-	@media screen and (max-height: 670px) {
-    .coin-container {
-        margin-top: 0px; /* Уменьшаем отступ для coin-container */
-    }
-    .energy-bar {
-        bottom: -30%; /* Уменьшаем отступ снизу для energy-bar */
-    }
-    .click-text {
-        font-size: 20px; /* Уменьшаем размер текста для click-text */
-    }
-	
+        -webkit-appearance: none;
+        /* Отключаем стилизацию браузера для WebKit */
+        appearance: none;
+        /* Отключаем стилизацию браузера */
+      }
 
- 
-}
+      .loading-text {
+        font-size: 0.5em;
+      }
 
-/* INVEST CARD */
+      .version {
+        font-size: 0.5em;
+        position: fixed;
+        bottom: 0%;
+      }
 
-.investment-options-container {
-    width: 90%;
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%);
-    top: 20%; /* Fixed margin from the .tabs */
-}
+      .logo {
+        position: fixed;
+        top: -2%;
+        transform: scale(0.6);
+      }
 
+      @media screen and (max-height: 670px) {
+        .coin-container {
+          margin-top: 0px;
+          /* Уменьшаем отступ для coin-container */
+        }
 
-.investment-options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
+        .energy-bar {
+          bottom: -30%;
+          /* Уменьшаем отступ снизу для energy-bar */
+        }
 
-.investment-cards-wrapper {
-    overflow-y: auto; /* Allow scrolling */
-    max-height: calc(100vh - 400px); /* Adjust height to fit within viewport and show all cards */
-    width: 100%;
-    padding-bottom: 100px; /* Add padding to the bottom to ensure the last card is visible */
-}
+        .click-text {
+          font-size: 20px;
+          /* Уменьшаем размер текста для click-text */
+        }
+      }
 
-.investment-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px auto; /* Центрируем карточки по горизонтали */
-    width: 90%;
-    max-width: 500px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+      /* INVEST CARD */
+      .investment-options-container {
+        width: 90%;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%);
+        top: 20%;
+        /* Fixed margin from the .tabs */
+      }
 
-    /* glass */
-    background: rgba(255, 255, 255, 0);
-    border-radius: 20px;
-    backdrop-filter: blur(7.4px);
-    -webkit-backdrop-filter: blur(7.4px);
-    border: 1px solid rgba(255, 255, 255, 0.11);
-}
+      .investment-options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
 
-.investment-card:hover {
-    transform: scale(1.05);
-}
+      .investment-cards-wrapper {
+        overflow-y: auto;
+        /* Allow scrolling */
+        max-height: calc(100vh - 400px);
+        /* Adjust height to fit within viewport and show all cards */
+        width: 100%;
+        padding-bottom: 100px;
+        /* Add padding to the bottom to ensure the last card is visible */
+      }
 
-.investment-logo {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-right: 10px;
-	border-radius: 10%;
-}
+      .investment-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 10px auto;
+        /* Центрируем карточки по горизонтали */
+        width: 90%;
+        max-width: 500px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        /* glass */
+        background: rgba(255, 255, 255, 0);
+        border-radius: 20px;
+        backdrop-filter: blur(7.4px);
+        -webkit-backdrop-filter: blur(7.4px);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
 
-.investment-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+      .investment-card:hover {
+        transform: scale(1.05);
+      }
 
-.investment-details h3 {
-    margin: 0;
-    font-size: 1.2em;
-}
+      .investment-logo {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        margin-right: 10px;
+        border-radius: 10%;
+      }
 
-.investment-details p {
-    margin: 5px 0 0;
-    font-size: 0.9em;
-}
+      .investment-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-.risk-text {
-    text-align: center; /* Центрирование текста */
-	font-size: 0.9em;
-	
-}
+      .investment-details h3 {
+        margin: 0;
+        font-size: 1.2em;
+      }
 
-.investment-details .expected-return {
-    font-size: 0.8em;
-	font-weight: bold;
-}
+      .investment-details p {
+        margin: 5px 0 0;
+        font-size: 0.9em;
+      }
 
+      .risk-text {
+        text-align: center;
+        /* Центрирование текста */
+        font-size: 0.9em;
+      }
 
+      .investment-details .expected-return {
+        font-size: 0.8em;
+        font-weight: bold;
+      }
 
-/* animation */
-
-    .screen {
-    display: none;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    user-select: none; /* Disable text selection */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    box-sizing: border-box;
-    flex-direction: column;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 0;
-	width: 100%;
-	height: 100%;
-}
-
-.screen.active {
-    display: flex;
-    animation: slideFadeIn 0.5s forwards;
-    opacity: 1;
-}
-
-.screen.fade-out {
-    animation: slideFadeOut 0.5s forwards;
-    opacity: 0;
-}
-		
-		@keyframes slideFadeIn {
-    0% {
+      /* animation */
+      .screen {
+        display: none;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        user-select: none;
+        /* Disable text selection */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        box-sizing: border-box;
+        flex-direction: column;
+        transition: opacity 0.5s ease, transform 0.5s ease;
         opacity: 0;
-       transform: translate(-50%, -50%) translateY(5%);
-    }
-    100% {
-        opacity: 1;
-		transform: translate(-50%, -50%) translateY(0%);
-      
-    }
-}
+        width: 100%;
+        height: 100%;
+      }
 
-@keyframes slideFadeOut {
-    0% {
+      .screen.active {
+        display: flex;
+        animation: slideFadeIn 0.5s forwards;
         opacity: 1;
-        transform: translate(-50%, -50%) translateY(0%);
-    }
-    100% {
+      }
+
+      .screen.fade-out {
+        animation: slideFadeOut 0.5s forwards;
         opacity: 0;
-        transform: translate(-50%, -50%) translateY(5%);
-    }
-}
-		
+      }
+
+      @keyframes slideFadeIn {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) translateY(5%);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%) translateY(0%);
+        }
+      }
+
+      @keyframes slideFadeOut {
+        0% {
+          opacity: 1;
+          transform: translate(-50%, -50%) translateY(0%);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) translateY(5%);
+        }
+      }
     </style>
-</head>
-<body>
- <div id="loading-overlay" class="loading-overlay">
-  <img class="logo" src="investhub.jpg" alt="logo">
-
-        Loading
-        <div class="progress-bar">
-            <div></div>
-        </div>
-		<p class="loading-text">Please wait 😊</p>
-		<p class="version">v 0.001</p>
+  </head>
+  <body>
+    <div id="loading-overlay" class="loading-overlay">
+      <img class="logo" src="investhub.jpg" alt="logo"> Loading <div class="progress-bar">
+        <div></div>
+      </div>
+      <p class="loading-text">Please wait 😊</p>
+      <p class="version">v 0.001</p>
     </div>
     <div class="background">
-        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" style="top:10%;left:20%;animation-duration:18s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b5.svg" style="top:40%;left:70%;animation-duration:22s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" style="top:70%;left:40%;animation-duration:16s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b6.svg" style="top:30%;left:80%;animation-duration:20s;">
-        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg" style="top:50%;left:50%;animation-duration:24s;">
+      <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" style="top:10%;left:20%;animation-duration:18s;">
+      <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b5.svg" style="top:40%;left:70%;animation-duration:22s;">
+      <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" style="top:70%;left:40%;animation-duration:16s;">
+      <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b6.svg" style="top:30%;left:80%;animation-duration:20s;">
+      <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg" style="top:50%;left:50%;animation-duration:24s;">
     </div>
     <div class="balance">0.000000000 $INV</div>
-
-	<div id="ton-connect" class="connect-button"></div>
-	<script src="script.js"></script>
-	
-	
-
-<div id="main-screen" class="screen active">
-<div id="click-text" class="click-text"></div>
-    <div class="coin-container">
-	
-
-        <img class="coin" src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" alt="Coin" >
+    <div id="ton-connect" class="connect-button"></div>
+    <script src="script.js"></script>
+    <div id="main-screen" class="screen active">
+      <div id="click-text" class="click-text"></div>
+      <div class="coin-container">
+        <img class="coin" src="https://twemoji.maxcdn.com/v/latest/svg/1f4b0.svg" alt="Coin">
         <div class="energy-bar">
-            <img src="https://twemoji.maxcdn.com/v/latest/svg/26a1.svg" alt="Lightning">
-            <progress value="500" max="1000"></progress>
-            <span>500/1000</span>
+          <img src="https://twemoji.maxcdn.com/v/latest/svg/26a1.svg" alt="Lightning">
+          <progress value="500" max="1000"></progress>
+          <span>500/1000</span>
         </div>
+      </div>
     </div>
-</div>
-
-
-
-
-
-
-
-<div id="invest-screen" class="screen">
-    <div class="tabs">
+    <div id="invest-screen" class="screen">
+      <div class="tabs">
         <button class="tab low active" onclick="showRiskLevel('low')">Low Risk</button>
         <button class="tab medium" onclick="showRiskLevel('medium')">Medium Risk</button>
         <button class="tab high" onclick="showRiskLevel('high')">High Risk</button>
-    </div>
-    <div class="investment-options-container">
+      </div>
+      <div class="investment-options-container">
         <div class="investment-options">
-            <!-- Варианты инвестиций -->
-            <div id="low-risk" class="risk-level active">
-                <p class="risk-text">Low risk investments offer lower returns but are less likely to lose value.</p>
-                <!-- Варианты инвестиций с низким риском -->
-                <div class="investment-cards-wrapper">
-				<div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="InvestSafe Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>InvestSafe</h3>
-                        <p>Invest in a fund that offers a stable return on investment.</p>
-                        <p class="expected-return">Expected Returns: 1%</p>
-                    </div>
+          <!-- Варианты инвестиций -->
+          <div id="low-risk" class="risk-level active">
+            <p class="risk-text">Low risk investments offer lower returns but are less likely to lose value.</p>
+            <!-- Варианты инвестиций с низким риском -->
+            <div class="investment-cards-wrapper">
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="InvestSafe Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>InvestSafe</h3>
+                  <p>Invest in a fund that offers a stable return on investment.</p>
+                  <p class="expected-return">Expected Returns: 1%</p>
                 </div>
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="BondMaster Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>BondMaster</h3>
-                        <p>Invest in a portfolio of high-quality bonds for steady returns.</p>
-                        <p class="expected-return">Expected Returns: 3%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="BondMaster Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>BondMaster</h3>
+                  <p>Invest in a portfolio of high-quality bonds for steady returns.</p>
+                  <p class="expected-return">Expected Returns: 3%</p>
                 </div>
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="BlueChip Capital Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>BlueChip Capital</h3>
-                        <p>Invest in established companies with a track record of stability.</p>
-                        <p class="expected-return">Expected Returns: 4%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="BlueChip Capital Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>BlueChip Capital</h3>
+                  <p>Invest in established companies with a track record of stability.</p>
+                  <p class="expected-return">Expected Returns: 4%</p>
                 </div>
-				<div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="BlueChip Capital Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>BlueChip Capital</h3>
-                        <p>Invest in established companies with a track record of stability.</p>
-                        <p class="expected-return">Expected Returns: 4%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="BlueChip Capital Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>BlueChip Capital</h3>
+                  <p>Invest in established companies with a track record of stability.</p>
+                  <p class="expected-return">Expected Returns: 4%</p>
                 </div>
-				</div>
+              </div>
             </div>
-            <div id="medium-risk" class="risk-level inactive-right">
-                <p class="risk-text">Medium risk investments offer moderate returns with some level of risk.</p>
-                <!-- Варианты инвестиций с средним риском -->
-				<div class="investment-cards-wrapper">
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="GrowthMax Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>GrowthMax</h3>
-                        <p>Invest in a fund that targets growth stocks and corporate bonds.</p>
-                        <p class="expected-return">Expected Returns: 6%</p>
-                    </div>
+          </div>
+          <div id="medium-risk" class="risk-level inactive-right">
+            <p class="risk-text">Medium risk investments offer moderate returns with some level of risk.</p>
+            <!-- Варианты инвестиций с средним риском -->
+            <div class="investment-cards-wrapper">
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="GrowthMax Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>GrowthMax</h3>
+                  <p>Invest in a fund that targets growth stocks and corporate bonds.</p>
+                  <p class="expected-return">Expected Returns: 6%</p>
                 </div>
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="EquityBoost Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>EquityBoost</h3>
-                        <p>Invest in a mix of stocks with growth potential.</p>
-                        <p class="expected-return">Expected Returns: 7%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="EquityBoost Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>EquityBoost</h3>
+                  <p>Invest in a mix of stocks with growth potential.</p>
+                  <p class="expected-return">Expected Returns: 7%</p>
                 </div>
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="CorporateGains Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>CorporateGains</h3>
-                        <p>Invest in bonds issued by reliable corporations for better returns.</p>
-                        <p class="expected-return">Expected Returns: 5%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="CorporateGains Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>CorporateGains</h3>
+                  <p>Invest in bonds issued by reliable corporations for better returns.</p>
+                  <p class="expected-return">Expected Returns: 5%</p>
                 </div>
-				<div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="CorporateGains Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>CorporateGains</h3>
-                        <p>Invest in bonds issued by reliable corporations for better returns.</p>
-                        <p class="expected-return">Expected Returns: 5%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="CorporateGains Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>CorporateGains</h3>
+                  <p>Invest in bonds issued by reliable corporations for better returns.</p>
+                  <p class="expected-return">Expected Returns: 5%</p>
                 </div>
-				</div>
+              </div>
             </div>
-            <div id="high-risk" class="risk-level inactive-right">
-                <p class="risk-text">High risk investments offer potentially high returns but come with significant risk.</p>
-                <!-- Варианты инвестиций с высоким риском -->
-				<div class="investment-cards-wrapper">
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="VentureX Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>VentureX</h3>
-                        <p>Invest in early-stage startups with high growth potential.</p>
-                        <p class="expected-return">Expected Returns: 10%</p>
-                    </div>
+          </div>
+          <div id="high-risk" class="risk-level inactive-right">
+            <p class="risk-text">High risk investments offer potentially high returns but come with significant risk.</p>
+            <!-- Варианты инвестиций с высоким риском -->
+            <div class="investment-cards-wrapper">
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="VentureX Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>VentureX</h3>
+                  <p>Invest in early-stage startups with high growth potential.</p>
+                  <p class="expected-return">Expected Returns: 10%</p>
                 </div>
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="CryptoGrowth Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>CryptoGrowth</h3>
-                        <p>Invest in volatile digital currencies for high returns.</p>
-                        <p class="expected-return">Expected Returns: 12%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="CryptoGrowth Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>CryptoGrowth</h3>
+                  <p>Invest in volatile digital currencies for high returns.</p>
+                  <p class="expected-return">Expected Returns: 12%</p>
                 </div>
-                <div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>TechVentures</h3>
-                        <p>Invest in new tech companies with potential for high growth.</p>
-                        <p class="expected-return">Expected Returns: 8%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>TechVentures</h3>
+                  <p>Invest in new tech companies with potential for high growth.</p>
+                  <p class="expected-return">Expected Returns: 8%</p>
                 </div>
-				<div class="investment-card">
-                    <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
-                    <div class="investment-details">
-                        <h3>TechVentures</h3>
-                        <p>Invest in new tech companies with potential for high growth.</p>
-                        <p class="expected-return">Expected Returns: 8%</p>
-                    </div>
+              </div>
+              <div class="investment-card">
+                <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
+                <div class="investment-details">
+                  <h3>TechVentures</h3>
+                  <p>Invest in new tech companies with potential for high growth.</p>
+                  <p class="expected-return">Expected Returns: 8%</p>
                 </div>
+              </div>
             </div>
-			</div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div id="friends-screen" class="screen">
-    <div class="friends-container">
+      <div class="friends-container">
         <h2>Your Friends</h2>
         <p>You earn 10% of what your referal earn.</p>
         <div class="friends-list">
-            <div class="friend">
-                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Friend 1">
-                <p>Friend 1</p>
-            </div>
-            <div class="friend">
-                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Friend 2">
-                <p>Friend 2</p>
-            </div>
-            <!-- Добавьте других друзей здесь -->
+          <div class="friend">
+            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Friend 1">
+            <p>Friend 1</p>
+          </div>
+          <div class="friend">
+            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Friend 2">
+            <p>Friend 2</p>
+          </div>
+          <!-- Добавьте других друзей здесь -->
         </div>
         <div class="earnings-info">
-            <p>Tokens Earned: 50.00000 $INV</p>
-            <button>Claim </button>
+          <p>Tokens Earned: 50.00000 $INV</p>
+          <button>Claim </button>
         </div>
+      </div>
     </div>
-</div>
-
-
-    
-	
-	
-	
     <div id="hashrate-screen" class="screen">
-	
-	 <div class="glass-card">
-	 <div class="card-title">Overall Statistics</div>
-   <div class="card-content" style="font-size: 0.8em;">Click on card to read info</div>
-
-    <div class="card" onclick="showInfo('mined')">
-    <div class="card-title">Total Tokens Mined</div>
-    <div class="card-content">0.00000 $INV</div>
-</div>
-
-    <div class="card" onclick="showInfo('spent')">
-        <div class="card-title">Total Tokens Spent</div>
-        <div class="card-content">0.00000 $INV</div>
+      <div class="glass-card">
+        <div class="card-title">Overall Statistics</div>
+        <div class="card-content" style="font-size: 0.8em;">Click on card to read info</div>
+        <div class="card" onclick="showInfo('mined')">
+          <div class="card-title">Total Tokens Mined</div>
+          <div class="card-content">0.00000 $INV</div>
+        </div>
+        <div class="card" onclick="showInfo('spent')">
+          <div class="card-title">Total Tokens Spent</div>
+          <div class="card-content">0.00000 $INV</div>
+        </div>
+        <div class="card" onclick="showInfo('halving')">
+          <div class="card-title">Time Until Halving</div>
+          <div class="card-content">365 Days</div>
+        </div>
+        <div id="info-modal" class="modal hide">
+          <div class="modal-content">
+            <p>InvestCoin is a limited-supply cryptocurrency with a fixed maximum supply. The mining reward halves every four years, making it increasingly scarce over time.</p>
+            <button onclick="hideInfo()" class="ok-button">OK</button>
+          </div>
+        </div>
+        <div class="modal-background"></div>
+      </div>
     </div>
-    <div class="card" onclick="showInfo('halving')">
-        <div class="card-title">Time Until Halving</div>
-        <div class="card-content">365 Days</div>
-    </div>
-	
-	
-	
-
-    <div id="info-modal" class="modal hide">
-    <div class="modal-content">
-        <p>InvestCoin is a limited-supply cryptocurrency with a fixed maximum supply. The mining reward halves every four years, making it increasingly scarce over time.</p>
-        <button onclick="hideInfo()" class="ok-button">OK</button>
-    </div>
-</div>
-
-<div class="modal-background"></div>
-
-</div>
-
-
-    </div>
-	
-	
-<div id="profile-screen" class="screen">
-    <div class="profile-container">
+    <div id="profile-screen" class="screen">
+      <div class="profile-container">
         <div class="profile-info">
-		 <canvas id="user-icon" width="100" height="100" style="border-radius: 30%;"></canvas>
-            <h2>John Doe</h2>
-			<h3>UID: 1111111111 </h3>
-			<p>Status: Inactive</p>
-            <p>Shares Owned: 100</p>
-            <p>Crypto Mined: 5 $INV</p>
-			<p>Crypto Burned: 1.02 $INV</p>
-			<p></p>
+          <canvas id="user-icon" width="100" height="100" style="border-radius: 30%;"></canvas>
+          <h2>John Doe</h2>
+          <h3>UID: 1111111111 </h3>
+          <p>Status: Inactive</p>
+          <p>Shares Owned: 100</p>
+          <p>Crypto Mined: 5 $INV</p>
+          <p>Crypto Burned: 1.02 $INV</p>
+          <p></p>
         </div>
-        <div class="profile-actions">
-
-        </div>
+        <div class="profile-actions"></div>
+      </div>
     </div>
-</div>
-
-	
-
     <div class="nav">
-        
-        <div onclick="showScreen('invest-screen')">
-            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4c8.svg" alt="INVEST">
-            <div>INVEST</div>
-        </div>
-        <div onclick="showScreen('hashrate-screen')">
-            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" alt="HASHRATE">
-            <div>STATS</div>
-        </div>
-		<div onclick="showScreen('main-screen')" class ="active">
-            <img src="https://twemoji.maxcdn.com/v/latest/svg/26cf.svg" alt="MINE">
+      <div onclick="showScreen('invest-screen')">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4c8.svg" alt="INVEST">
+        <div>INVEST</div>
+      </div>
+      <div onclick="showScreen('hashrate-screen')">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg" alt="HASHRATE">
+        <div>STATS</div>
+      </div>
+      <div onclick="showScreen('main-screen')" class="active">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/26cf.svg" alt="MINE">
         <div>MINE</div>
-        </div>
-		<div onclick="showScreen('friends-screen')">
-            <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
-            <div>FRENS</div>
-        </div>
-		<div onclick="showScreen('profile-screen')">
-    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f464.svg" alt="PROFILE">
-    <div>ME</div>
-	
-	
-	
-	
-</div>
-
-
-
+      </div>
+      <div onclick="showScreen('friends-screen')">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f465.svg" alt="FRIENDS">
+        <div>FRENS</div>
+      </div>
+      <div onclick="showScreen('profile-screen')">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f464.svg" alt="PROFILE">
+        <div>ME</div>
+      </div>
     </div>
-
     <script>
-	
-	// Проверяем, что объект tg существует, прежде чем использовать его
-   
-        let tg = window.Telegram.WebApp; // Получаем объект webapp телеграма
-
-        // Расширяем окно на весь экран
-        tg.expand();
-
-		
-		 let profilePicture = document.querySelector('.profile-info img');
-    let profileName = document.querySelector('.profile-info h2');
-	let profileID = document.querySelector('.profile-info h3');
-
-		 // Проверяем наличие данных перед их использованием
-    if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) {
+      // Проверяем, что объект tg существует, прежде чем использовать его
+      let tg = window.Telegram.WebApp; // Получаем объект webapp телеграма
+      // Расширяем окно на весь экран
+      tg.expand();
+      let profilePicture = document.querySelector('.profile-info img');
+      let profileName = document.querySelector('.profile-info h2');
+      let profileID = document.querySelector('.profile-info h3');
+      // Проверяем наличие данных перед их использованием
+      if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) {
         // Изменяем фото профиля на аватарку из Telegram
         profilePicture.src = tg.initDataUnsafe.user.photo_url;
-    }
+      }
+      if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.first_name && tg.initDataUnsafe.user.last_name) {
+        // Изменяем имя пользователя на имя из Telegram
+        profileName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+        profileID.innerText = `UID: ${tg.initDataUnsafe.user.id}`;
+      }
+      document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      });
 
-    if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.first_name && tg.initDataUnsafe.user.last_name) {
-    // Изменяем имя пользователя на имя из Telegram
-    profileName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-    profileID.innerText = `UID: ${tg.initDataUnsafe.user.id}`;
-}
-	
-	
-        document.addEventListener('gesturestart', function (e) {
-            e.preventDefault();
-        });
-
-function showScreen(screenId) {
+      function showScreen(screenId) {
         document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.remove('active');
+          screen.classList.remove('active');
         });
         document.getElementById(screenId).classList.add('active');
-        
         document.querySelectorAll('.nav div').forEach(navItem => {
-            navItem.classList.remove('active');
+          navItem.classList.remove('active');
         });
         document.querySelector(`.nav div[onclick="showScreen('${screenId}')"]`).classList.add('active');
-    
-	  document.addEventListener('DOMContentLoaded', function() {
-        showScreen('main-screen');
-    });
-	
-	
-	}
-		
-		
-	function showInfo(type) {
-    const modal = document.getElementById('info-modal');
-    const modalContent = document.querySelector('.modal-content');
-
-    let infoText = '';
-    if (type === 'mined') {
-    infoText = "InvestCoins are mined through an innovative process that involves users actively engaging with the platform. By tapping the screen and making strategic investments, users can earn InvestCoins.";
-} else if (type === 'spent') {
-    infoText = "InvestCoins are spent when users engage in transactions within the InvestHub ecosystem. This includes purchasing assets, transferring funds to other users, or participating in various investment opportunities provided by the platform.";
-} else if (type === 'halving') {
-    infoText = "InvestCoin halving is a crucial mechanism designed to reduce the mining reward by half. This strategic reduction controls inflation and gradually decreases the supply of new InvestCoins, increasing their scarcity and potential value over time.";
-} else {
-    infoText = "InvestCoin is a limited-supply cryptocurrency built on the TON platform. With a fixed maximum supply and a halving event every four years, InvestCoin becomes increasingly scarce, enhancing its value and investment appeal within the InvestHub ecosystem.";
-}
-
-
-
-    modalContent.innerHTML = `<p>${infoText}</p><button onclick="hideInfo()" class="ok-button">OK</button>`;
-
-    modal.classList.remove('hide');
-    modal.classList.add('show');
-    modal.style.display = 'block';
-    if (!modal.classList.contains('fade-in')) {
-        modal.classList.add('fade-in');
-    }
-}
-
-
-function hideInfo() {
-    const modal = document.getElementById('info-modal');
-    modal.classList.remove('show');
-    modal.classList.add('hide');
-    // Добавляем класс 'fade-out' только если его нет
-    if (!modal.classList.contains('fade-out')) {
-        modal.classList.add('fade-out');
-    }
-    setTimeout(() => {
-        modal.style.display = 'none';
-        // После окончания анимации, удаляем классы 'hide' и 'fade-out'
-        modal.classList.remove('hide', 'fade-out');
-    }, 300);  // Соответствует длительности CSS-перехода
-}
-
-
-
-let currentRiskLevel = 'low';
-
-function showRiskLevel(riskLevel) {
-    const riskLevels = document.querySelectorAll('.risk-level');
-    const direction = getDirection(currentRiskLevel, riskLevel);
-
-
-
-    // Remove active class from all risk levels and add appropriate inactive class
-    riskLevels.forEach(level => {
-        level.classList.remove('active', 'inactive-left', 'inactive-right');
-        if (level.id === riskLevel + '-risk') {
-            level.classList.add('active');
-        } else {
-            if (level.id === currentRiskLevel + '-risk') {
-                level.classList.add('inactive-' + getDirection(riskLevel, level.id.split('-')[0]));
-            } else {
-			console.log('GetDirection(', riskLevel, ',', level.id.split('-')[0], ')'); // Вывод направления в консоль
-                level.classList.add('inactive-' + getDirection(riskLevel, level.id.split('-')[0]));
-            }
-        }
-
-        // Remove animation classes
-        level.classList.remove('slide-in-left', 'slide-in-right');
-    });
-
-    // Update tab button active state
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
-    document.querySelector(`.tab.${riskLevel}`).classList.add('active');
-
-    currentRiskLevel = riskLevel;
-	
-}
-
-function getDirection(current, target) {
-    const order = ['low', 'medium', 'high'];
-    const currentIndex = order.indexOf(current);
-    const targetIndex = order.indexOf(target);
-	console.log('Direction:', currentIndex < targetIndex ? 'left' : 'right'); // Вывод направления в консоль
-    return currentIndex > targetIndex ? 'left' : 'right';
-}
-
-
-/* coin click*/
-
-
-const coins = document.querySelectorAll('.coin');
-
-coins.forEach(coin => {
-    coin.addEventListener('click', showClickText);
-});
-
-function showClickText(event) {
-    const mainScreen = document.getElementById('main-screen');
-    if (!mainScreen.classList.contains('active')) {
-        return;
-    }
-
-    const clickText = document.createElement('div');
-    clickText.classList.add('click-text');
-    clickText.innerHTML = '+0.001';
-
-    document.body.appendChild(clickText);
-
-    const clickX = event.clientX;
-    const clickY = event.clientY;
-
-    clickText.style.left = clickX + 'px';
-    clickText.style.top = clickY + 'px';
-
-    setTimeout(() => {
-        clickText.classList.add('fade-in-text');
-    }, 0);
-
-    setTimeout(() => {
-        clickText.classList.add('fade-out-text');
-    }, 500);
-
-    setTimeout(() => {
-        clickText.remove();
-    }, 1000);
-}
-
-
-
-function removeAllClickTexts() {
-    const clickTexts = document.querySelectorAll('.click-text');
-    clickTexts.forEach(clickText => clickText.remove());
-}
-
-/*loading*/
-
-document.addEventListener('DOMContentLoaded', function() {
-  
-    const images = document.querySelectorAll('img');
-    const totalImages = images.length;
-    let loadedImages = 0;
-    let timeoutID;
-
-    images.forEach(image => {
-	
-	image.addEventListener('dragstart', (event) => {
-            event.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+          showScreen('main-screen');
         });
-	
-        if (image.complete) {
-            loadedImages++;
+      }
+
+      function showInfo(type) {
+        const modal = document.getElementById('info-modal');
+        const modalContent = document.querySelector('.modal-content');
+        let infoText = '';
+        if (type === 'mined') {
+          infoText = "InvestCoins are mined through an innovative process that involves users actively engaging with the platform. By tapping the screen and making strategic investments, users can earn InvestCoins.";
+        } else if (type === 'spent') {
+          infoText = "InvestCoins are spent when users engage in transactions within the InvestHub ecosystem. This includes purchasing assets, transferring funds to other users, or participating in various investment opportunities provided by the platform.";
+        } else if (type === 'halving') {
+          infoText = "InvestCoin halving is a crucial mechanism designed to reduce the mining reward by half. This strategic reduction controls inflation and gradually decreases the supply of new InvestCoins, increasing their scarcity and potential value over time.";
         } else {
-            image.addEventListener('load', () => {
-                loadedImages++;
-                updateLoadingProgress();
-            });
+          infoText = "InvestCoin is a limited-supply cryptocurrency built on the TON platform. With a fixed maximum supply and a halving event every four years, InvestCoin becomes increasingly scarce, enhancing its value and investment appeal within the InvestHub ecosystem.";
         }
-    });
+        modalContent.innerHTML = `
+																																			<p>${infoText}</p>
+																																			<button onclick="hideInfo()" class="ok-button">OK</button>`;
+        modal.classList.remove('hide');
+        modal.classList.add('show');
+        modal.style.display = 'block';
+        if (!modal.classList.contains('fade-in')) {
+          modal.classList.add('fade-in');
+        }
+      }
 
-    function updateLoadingProgress() {
-        const loadingText = document.querySelector('.loading-text');
-        const progressBar = document.querySelector('.progress-bar div');
-        const progressFraction = loadedImages / totalImages;
+      function hideInfo() {
+        const modal = document.getElementById('info-modal');
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+        // Добавляем класс 'fade-out' только если его нет
+        if (!modal.classList.contains('fade-out')) {
+          modal.classList.add('fade-out');
+        }
+        setTimeout(() => {
+          modal.style.display = 'none';
+          // После окончания анимации, удаляем классы 'hide' и 'fade-out'
+          modal.classList.remove('hide', 'fade-out');
+        }, 300); // Соответствует длительности CSS-перехода
+      }
+      let currentRiskLevel = 'low';
 
-        progressBar.style.width = `${progressFraction * 100}%`;
+      function showRiskLevel(riskLevel) {
+        const riskLevels = document.querySelectorAll('.risk-level');
+        const direction = getDirection(currentRiskLevel, riskLevel);
+        // Remove active class from all risk levels and add appropriate inactive class
+        riskLevels.forEach(level => {
+          level.classList.remove('active', 'inactive-left', 'inactive-right');
+          if (level.id === riskLevel + '-risk') {
+            level.classList.add('active');
+          } else {
+            if (level.id === currentRiskLevel + '-risk') {
+              level.classList.add('inactive-' + getDirection(riskLevel, level.id.split('-')[0]));
+            } else {
+              console.log('GetDirection(', riskLevel, ',', level.id.split('-')[0], ')'); // Вывод направления в консоль
+              level.classList.add('inactive-' + getDirection(riskLevel, level.id.split('-')[0]));
+            }
+          }
+          // Remove animation classes
+          level.classList.remove('slide-in-left', 'slide-in-right');
+        });
+        // Update tab button active state
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.querySelector(`.tab.${riskLevel}`).classList.add('active');
+        currentRiskLevel = riskLevel;
+      }
 
-       // loadingText.textContent = `Please wait 😊 (`+`${loadedImages} / ${totalImages}` ;
+      function getDirection(current, target) {
+        const order = ['low', 'medium', 'high'];
+        const currentIndex = order.indexOf(current);
+        const targetIndex = order.indexOf(target);
+        console.log('Direction:', currentIndex < targetIndex ? 'left' : 'right'); // Вывод направления в консоль
+        return currentIndex > targetIndex ? 'left' : 'right';
+      }
+      /* coin click*/
+      const coins = document.querySelectorAll('.coin');
+      coins.forEach(coin => {
+        coin.addEventListener('click', showClickText);
+      });
 
-        if (loadedImages === totalImages) {
+      function showClickText(event) {
+        const mainScreen = document.getElementById('main-screen');
+        if (!mainScreen.classList.contains('active')) {
+          return;
+        }
+        const clickText = document.createElement('div');
+        clickText.classList.add('click-text');
+        clickText.innerHTML = '+0.001';
+        document.body.appendChild(clickText);
+        const clickX = event.clientX;
+        const clickY = event.clientY;
+        clickText.style.left = clickX + 'px';
+        clickText.style.top = clickY + 'px';
+        setTimeout(() => {
+          clickText.classList.add('fade-in-text');
+        }, 0);
+        setTimeout(() => {
+          clickText.classList.add('fade-out-text');
+        }, 500);
+        setTimeout(() => {
+          clickText.remove();
+        }, 1000);
+      }
+
+      function removeAllClickTexts() {
+        const clickTexts = document.querySelectorAll('.click-text');
+        clickTexts.forEach(clickText => clickText.remove());
+      }
+      /*loading*/
+      document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('img');
+        const totalImages = images.length;
+        let loadedImages = 0;
+        let timeoutID;
+        images.forEach(image => {
+          image.addEventListener('dragstart', (event) => {
+            event.preventDefault();
+          });
+          if (image.complete) {
+            loadedImages++;
+          } else {
+            image.addEventListener('load', () => {
+              loadedImages++;
+              updateLoadingProgress();
+            });
+          }
+        });
+
+        function updateLoadingProgress() {
+          const loadingText = document.querySelector('.loading-text');
+          const progressBar = document.querySelector('.progress-bar div');
+          const progressFraction = loadedImages / totalImages;
+          progressBar.style.width = `${progressFraction * 100}%`;
+          // loadingText.textContent = `Please wait 😊 (`+`${loadedImages} / ${totalImages}` ;
+          if (loadedImages === totalImages) {
             completeLoading();
             clearTimeout(timeoutID); // Очистить таймаут, если все изображения загружены
+          }
         }
-    }
-
-    if (loadedImages === totalImages) {
-        console.log('Все изображения уже загружены!');
-        completeLoading();
-        clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
-    } else {
-        timeoutID = setTimeout(() => {
+        if (loadedImages === totalImages) {
+          console.log('Все изображения уже загружены!');
+          completeLoading();
+          clearTimeout(timeoutID); // Очистить таймаут, если все изображения уже загружены
+        } else {
+          timeoutID = setTimeout(() => {
             const loadingText = document.querySelector('.loading-text');
-            loadingText.innerHTML = 'Something went wrong 😨<br>Wait or update the page...';
-            timeoutID = setTimeout(() => {
-            }, 5000);
-        }, 15000);
-    }
+            loadingText.innerHTML = 'Something went wrong 😨 < br > Wait or update the page...';
+            timeoutID = setTimeout(() => {}, 5000);
+          }, 15000);
+        }
 
-    function completeLoading() {
-        const loadingOverlay = document.getElementById('loading-overlay');
-        loadingOverlay.style.transition = 'opacity 1s';
-        loadingOverlay.style.opacity = 0;
-        setTimeout(() => {
+        function completeLoading() {
+          const loadingOverlay = document.getElementById('loading-overlay');
+          loadingOverlay.style.transition = 'opacity 1s';
+          loadingOverlay.style.opacity = 0;
+          setTimeout(() => {
             loadingOverlay.style.display = 'none';
-        }, 1000);
-    }
-	
-	// Заполняем прогресс-бар до 100%, если все изображения уже загружены
-    if (loadedImages === totalImages) {
-        const progressBar = document.querySelector('.progress-bar div');
-        progressBar.style.width = '100%';
-    }
-});
-
-         document.addEventListener('DOMContentLoaded', function() {
+          }, 1000);
+        }
+        // Заполняем прогресс-бар до 100%, если все изображения уже загружены
+        if (loadedImages === totalImages) {
+          const progressBar = document.querySelector('.progress-bar div');
+          progressBar.style.width = '100%';
+        }
+      });
+      document.addEventListener('DOMContentLoaded', function() {
         var colours = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
-        
         var nameElement = document.querySelector('.profile-info h2');
         var name = nameElement ? nameElement.textContent.trim() : 'Unknown User';
         var nameSplit = name.split(" ");
         var initials = '';
-
         if (nameSplit.length === 1) {
-            initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[0].charAt(1).toUpperCase();
+          initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[0].charAt(1).toUpperCase();
         } else if (nameSplit.length === 2) {
-            initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
+          initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
         } else {
-            initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
+          initials = nameSplit[0].charAt(0).toUpperCase() + nameSplit[1].charAt(0).toUpperCase();
         }
-
         var charIndex = initials.charCodeAt(0) - 65;
         var colourIndex = charIndex % 19;
-
         var canvas = document.getElementById("user-icon");
         var context = canvas.getContext("2d");
-
         var canvasWidth = canvas.width;
         var canvasHeight = canvas.height;
         var canvasCssWidth = canvasWidth;
         var canvasCssHeight = canvasHeight;
-
         if (window.devicePixelRatio) {
-            canvas.width = canvasWidth * window.devicePixelRatio;
-            canvas.height = canvasHeight * window.devicePixelRatio;
-            canvas.style.width = canvasCssWidth + "px";
-            canvas.style.height = canvasCssHeight + "px";
-            context.scale(window.devicePixelRatio, window.devicePixelRatio);
+          canvas.width = canvasWidth * window.devicePixelRatio;
+          canvas.height = canvasHeight * window.devicePixelRatio;
+          canvas.style.width = canvasCssWidth + "px";
+          canvas.style.height = canvasCssHeight + "px";
+          context.scale(window.devicePixelRatio, window.devicePixelRatio);
         }
-
         context.fillStyle = colours[colourIndex];
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.font = "48px Roboto Slab"; // Adjust font size for smaller canvas
         context.textAlign = "center";
         context.fillStyle = "#FFF";
         context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);
-    });
-
-
-
-
-let userIcon = document.getElementById('user-icon');
-userIcon.addEventListener('mousedown', function() {
-    userIcon.classList.add('pressed');
-    setTimeout(function() {
-        userIcon.classList.remove('pressed');
-    }, 100);
-});
-
-let cardIcons = document.querySelectorAll('.card');
-
-cardIcons.forEach(cardIcon => {
-    cardIcon.addEventListener('mousedown', function() {
-        cardIcon.classList.add('pressed');
+      });
+      let userIcon = document.getElementById('user-icon');
+      userIcon.addEventListener('mousedown', function() {
+        userIcon.classList.add('pressed');
         setTimeout(function() {
-            cardIcon.classList.remove('pressed');
+          userIcon.classList.remove('pressed');
         }, 100);
-    });
-});
-
-
-
-
-		
+      });
+      let cardIcons = document.querySelectorAll('.card');
+      cardIcons.forEach(cardIcon => {
+        cardIcon.addEventListener('mousedown', function() {
+          cardIcon.classList.add('pressed');
+          setTimeout(function() {
+            cardIcon.classList.remove('pressed');
+          }, 100);
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
