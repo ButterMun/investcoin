@@ -693,7 +693,7 @@
         /* Размер шрифта */
       }
 
-      .click-text {
+    .click-text {
         position: absolute;
         /* Добавлено */
         color: #ffeb3b;
@@ -704,23 +704,28 @@
         pointer-events: none;
         z-index: 100;
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+		animation: moveUp 2s linear forwards; 
       }
 
       .fade-in-text {
-        opacity: 1;
-        transform: translateY(0);
-        /* Добавлено */
-        top: calc(50% - 50px);
-        /* Стартовая позиция */
-      }
+    opacity: 1;
+    transform: translateY(0);
+    top: calc(50% - 70px);
+}
 
-      .fade-out-text {
-        opacity: 0;
-        transform: translateY(-50px);
-        /* Добавлено */
-        top: 20px;
-        /* Конечная позиция */
-      }
+.fade-out-text {
+    opacity: 0;
+    transform: translateY(-50px);
+    top: 50px;
+}
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100px); /* Увеличиваем расстояние */
+    }
+}
 
       /* loading */
       .loading-overlay {
@@ -1304,29 +1309,29 @@ cardsLists.forEach(cardsList => {
         coin.addEventListener('click', showClickText);
       });
 
-      function showClickText(event) {
-        const mainScreen = document.getElementById('main-screen');
-        if (!mainScreen.classList.contains('active')) {
-          return;
-        }
-        const clickText = document.createElement('div');
-        clickText.classList.add('click-text');
-        clickText.innerHTML = '+0.001';
-        document.body.appendChild(clickText);
-        const clickX = event.clientX;
-        const clickY = event.clientY;
-        clickText.style.left = clickX + 'px';
-        clickText.style.top = clickY + 'px';
-        setTimeout(() => {
-          clickText.classList.add('fade-in-text');
-        }, 0);
-        setTimeout(() => {
-          clickText.classList.add('fade-out-text');
-        }, 500);
-        setTimeout(() => {
-          clickText.remove();
-        }, 1000);
-      }
+  function showClickText(event) {
+    const mainScreen = document.getElementById('main-screen');
+    if (!mainScreen.classList.contains('active')) {
+        return;
+    }
+    const clickText = document.createElement('div');
+    clickText.classList.add('click-text');
+    clickText.innerHTML = '+0.001';
+    document.body.appendChild(clickText);
+    const clickX = event.clientX;
+    const clickY = event.clientY;
+    clickText.style.left = clickX + 'px';
+    clickText.style.top = clickY + 'px';
+    setTimeout(() => {
+        clickText.classList.add('fade-in-text');
+    }, 0);
+    setTimeout(() => {
+        clickText.classList.add('fade-out-text');
+    }, 500); // уменьшаем задержку перед началом анимации
+    setTimeout(() => {
+        clickText.remove();
+    }, 1000); // увеличиваем время до удаления элемента
+}
 
       function removeAllClickTexts() {
         const clickTexts = document.querySelectorAll('.click-text');
