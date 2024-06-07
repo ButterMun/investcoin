@@ -1304,48 +1304,35 @@ cardsLists.forEach(cardsList => {
         return currentIndex > targetIndex ? 'left' : 'right';
       }
       /* coin click*/
-   const coins = document.querySelectorAll('.coin');
+const coins = document.querySelectorAll('.coin');
 coins.forEach(coin => {
-    coin.addEventListener('click', showClickText);
     coin.addEventListener('touchstart', showClickText);
 });
 
-document.addEventListener('touchstart', function(event) {
-    alert('Touch detected!');
-});
-
-
 function showClickText(event) {
-    event.preventDefault();
     const mainScreen = document.getElementById('main-screen');
     if (!mainScreen.classList.contains('active')) {
         return;
     }
-    
-    // Получаем все касания
-    const touches = event.touches || [event];
-    
-    // Обходим каждое касание
-    touches.forEach(touch => {
-        const clickText = document.createElement('div');
-        clickText.classList.add('click-text');
-        clickText.innerHTML = '+0.001';
-        document.body.appendChild(clickText);
-        const clickX = touch.pageX; // Изменено на pageX
-        const clickY = touch.pageY; // Изменено на pageY
-        clickText.style.left = clickX + 'px';
-        clickText.style.top = clickY + 'px';
-        setTimeout(() => {
-            clickText.classList.add('fade-in-text');
-        }, 0);
-        setTimeout(() => {
-            clickText.classList.add('fade-out-text');
-        }, 500);
-        setTimeout(() => {
-            clickText.remove();
-        }, 1000);
-    });
+    const clickText = document.createElement('div');
+    clickText.classList.add('click-text');
+    clickText.innerHTML = '+0.001';
+    document.body.appendChild(clickText);
+    const clickX = event.touches[0].clientX;
+    const clickY = event.touches[0].clientY;
+    clickText.style.left = clickX + 'px';
+    clickText.style.top = clickY + 'px';
+    setTimeout(() => {
+        clickText.classList.add('fade-in-text');
+    }, 0);
+    setTimeout(() => {
+        clickText.classList.add('fade-out-text');
+    }, 500);
+    setTimeout(() => {
+        clickText.remove();
+    }, 1000);
 }
+
 
       function removeAllClickTexts() {
         const clickTexts = document.querySelectorAll('.click-text');
