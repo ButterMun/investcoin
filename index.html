@@ -535,11 +535,31 @@ border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .risk-level {
-    display: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateX(100%);
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .risk-level.active {
-    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+}
+
+.risk-level.inactive-left {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.risk-level.inactive-right {
+    opacity: 0;
+    transform: translateX(100%);
 }
 
 /* main-screen */
@@ -939,7 +959,7 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                 </div>
 				</div>
             </div>
-            <div id="medium-risk" class="risk-level" style="display: none;">
+            <div id="medium-risk" class="risk-level inactive-right">
                 <p class="risk-text">Medium risk investments offer moderate returns with some level of risk.</p>
                 <!-- Варианты инвестиций с средним риском -->
 				<div class="investment-cards-wrapper">
@@ -967,9 +987,17 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                         <p class="expected-return">Expected Returns: 5%</p>
                     </div>
                 </div>
+				<div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="CorporateGains Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>CorporateGains</h3>
+                        <p>Invest in bonds issued by reliable corporations for better returns.</p>
+                        <p class="expected-return">Expected Returns: 5%</p>
+                    </div>
+                </div>
 				</div>
             </div>
-            <div id="high-risk" class="risk-level" style="display: none;">
+            <div id="high-risk" class="risk-level inactive-right">
                 <p class="risk-text">High risk investments offer potentially high returns but come with significant risk.</p>
                 <!-- Варианты инвестиций с высоким риском -->
 				<div class="investment-cards-wrapper">
@@ -990,6 +1018,14 @@ border: 1px solid rgba(255, 255, 255, 0.11);
                     </div>
                 </div>
                 <div class="investment-card">
+                    <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
+                    <div class="investment-details">
+                        <h3>TechVentures</h3>
+                        <p>Invest in new tech companies with potential for high growth.</p>
+                        <p class="expected-return">Expected Returns: 8%</p>
+                    </div>
+                </div>
+				<div class="investment-card">
                     <img src="https://via.placeholder.com/50" alt="TechVentures Logo" class="investment-logo">
                     <div class="investment-details">
                         <h3>TechVentures</h3>
@@ -1175,10 +1211,10 @@ function showScreen(screenId) {
         });
         document.querySelector(`.nav div[onclick="showScreen('${screenId}')"]`).classList.add('active');
     
-	
 	  document.addEventListener('DOMContentLoaded', function() {
         showScreen('main-screen');
     });
+	
 	
 	}
 		
@@ -1228,21 +1264,50 @@ function hideInfo() {
 
 
 
-function showRiskLevel(level) {
-    // Сначала скрываем все уровни риска
-    document.querySelectorAll('.risk-level').forEach(function(levelElement) {
-        levelElement.style.display = 'none';
+let currentRiskLevel = 'low';
+
+function showRiskLevel(riskLevel) {
+    const riskLevels = document.querySelectorAll('.risk-level');
+    const direction = getDirection(currentRiskLevel, riskLevel);
+
+
+
+    // Remove active class from all risk levels and add appropriate inactive class
+    riskLevels.forEach(level => {
+        level.classList.remove('active', 'inactive-left', 'inactive-right');
+        if (level.id === riskLevel + '-risk') {
+            level.classList.add('active');
+        } else {
+            if (level.id === currentRiskLevel + '-risk') {
+                level.classList.add('inactive-' + getDirection(riskLevel, level.id.split('-')[0]));
+            } else {
+			console.log('GetDirection(', riskLevel, ',', level.id.split('-')[0], ')'); // Вывод направления в консоль
+                level.classList.add('inactive-' + getDirection(riskLevel, level.id.split('-')[0]));
+            }
+        }
+
+        // Remove animation classes
+        level.classList.remove('slide-in-left', 'slide-in-right');
     });
 
-    // Затем показываем выбранный уровень риска
-    document.getElementById(level + '-risk').style.display = 'block';
-    
-    // Делаем выбранную кнопку активной, а остальные неактивными
-    document.querySelectorAll('.tab').forEach(function(tab) {
-        tab.classList.remove('active');
-    });
-    document.querySelector('.tab.' + level).classList.add('active');
+    // Update tab button active state
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    document.querySelector(`.tab.${riskLevel}`).classList.add('active');
+
+    currentRiskLevel = riskLevel;
+	
 }
+
+function getDirection(current, target) {
+    const order = ['low', 'medium', 'high'];
+    const currentIndex = order.indexOf(current);
+    const targetIndex = order.indexOf(target);
+	console.log('Direction:', currentIndex < targetIndex ? 'left' : 'right'); // Вывод направления в консоль
+    return currentIndex > targetIndex ? 'left' : 'right';
+}
+
+
 /* coin click*/
 
 
