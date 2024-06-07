@@ -471,10 +471,20 @@
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
-    max-height: 190px; /* Increased maximum height for the friends list */
+    max-height: 150px; /* Increased maximum height for the friends list */
     overflow-y: auto;
 	max-width: 400px;
 }
+
+
+
+ @media screen and (max-height: 630px) {
+           .friends-list {
+		    max-height: 110px;
+		   }
+		
+      }
+
 		
 		/* Center elements in each row */
 .friends-list > .friend {
@@ -812,6 +822,10 @@
           /* Уменьшаем размер текста для click-text */
         }
       }
+
+
+
+
 
       /* INVEST CARD */
       .investment-options-container {
