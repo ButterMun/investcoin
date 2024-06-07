@@ -1304,12 +1304,14 @@ cardsLists.forEach(cardsList => {
         return currentIndex > targetIndex ? 'left' : 'right';
       }
       /* coin click*/
-      const coins = document.querySelectorAll('.coin');
-      coins.forEach(coin => {
-        coin.addEventListener('click', showClickText);
-      });
+   const coins = document.querySelectorAll('.coin');
+coins.forEach(coin => {
+    coin.addEventListener('click', showClickText);
+    coin.addEventListener('touchstart', showClickText); // Добавляем обработчик для тач-события
+});
 
-  function showClickText(event) {
+function showClickText(event) {
+    event.preventDefault(); // Отменяем стандартное поведение для тач-события
     const mainScreen = document.getElementById('main-screen');
     if (!mainScreen.classList.contains('active')) {
         return;
@@ -1318,8 +1320,8 @@ cardsLists.forEach(cardsList => {
     clickText.classList.add('click-text');
     clickText.innerHTML = '+0.001';
     document.body.appendChild(clickText);
-    const clickX = event.clientX;
-    const clickY = event.clientY;
+    const clickX = event.clientX || event.touches[0].clientX; // Проверяем, есть ли координаты клика или тача
+    const clickY = event.clientY || event.touches[0].clientY;
     clickText.style.left = clickX + 'px';
     clickText.style.top = clickY + 'px';
     setTimeout(() => {
@@ -1327,10 +1329,10 @@ cardsLists.forEach(cardsList => {
     }, 0);
     setTimeout(() => {
         clickText.classList.add('fade-out-text');
-    }, 500); // уменьшаем задержку перед началом анимации
+    }, 500);
     setTimeout(() => {
         clickText.remove();
-    }, 1000); // увеличиваем время до удаления элемента
+    }, 1000);
 }
 
       function removeAllClickTexts() {
