@@ -1310,6 +1310,11 @@ coins.forEach(coin => {
     coin.addEventListener('touchstart', showClickText);
 });
 
+document.addEventListener('touchstart', function(event) {
+    alert('Touch detected!');
+});
+
+
 function showClickText(event) {
     event.preventDefault();
     const mainScreen = document.getElementById('main-screen');
