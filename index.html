@@ -89,7 +89,6 @@
         }
       }
 
-      .coin {}
 
       .coin {
         width: 250px;
@@ -1235,7 +1234,9 @@
       </div>
     </div>
     <script>
-      // Проверяем, что объект tg существует, прежде чем использовать его
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	// Проверяем, что объект tg существует, прежде чем использовать его
       let tg = window.Telegram.WebApp; // Получаем объект webapp телеграма
       // Расширяем окно на весь экран
       tg.expand();
@@ -1252,9 +1253,28 @@
         profileName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
         profileID.innerText = `UID: ${tg.initDataUnsafe.user.id}`;
       }
+	console.log('fefwkfwefjkew');
+	
+	
       document.addEventListener('gesturestart', function(e) {
         e.preventDefault();
       });
+	const coins = document.querySelectorAll('.coin');
+
+coins.forEach(coin => {
+    coin.addEventListener('click', showClickText);
+    coin.addEventListener('touchstart', showClickText);
+});
+
+	
+	});
+	
+	
+	
+      
+	  
+	  
+	  
 
       function showScreen(screenId) {
         document.querySelectorAll('.screen').forEach(screen => {
@@ -1268,7 +1288,8 @@
         document.addEventListener('DOMContentLoaded', function() {
           showScreen('main-screen');
         });
-		
+		  removeAllClickTexts();
+        removeAllCashEmojis();
 
     const friendsList = document.querySelector('.friends-list');
         friendsList.scrollTop = 0;
@@ -1357,12 +1378,10 @@ cardsLists.forEach(cardsList => {
         return currentIndex > targetIndex ? 'left' : 'right';
       }
       /* coin click*/
-const coins = document.querySelectorAll('.coin');
-
-coins.forEach(coin => {
-    coin.addEventListener('click', showClickText);
-    coin.addEventListener('touchstart', showClickText);
-});
+	  
+	  
+	  
+	  
 
 function showClickText(event) {
     event.preventDefault();
@@ -1390,8 +1409,8 @@ function showClickText(event) {
     const cashEmoji = document.createElement('div');
     cashEmoji.classList.add('cash-emoji');
     cashEmoji.style.backgroundImage = `url(${coinImage})`;
-    cashEmoji.style.width = '75px';
-    cashEmoji.style.height = '75px';
+    cashEmoji.style.width = '60px';
+    cashEmoji.style.height = '60px';
 //	cashEmoji.style.transform = `rotate(${Math.random() * 360}deg)`;
     document.body.appendChild(cashEmoji);
 
@@ -1458,6 +1477,13 @@ function showClickText(event) {
         const clickTexts = document.querySelectorAll('.click-text');
         clickTexts.forEach(clickText => clickText.remove());
       }
+	  
+	  
+      function removeAllCashEmojis() {
+        const cashEmojis = document.querySelectorAll('.cash-emoji');
+       cashEmojis.forEach(cashEmojis => cashEmojis.remove());
+      }
+	  
       /*loading*/
       document.addEventListener('DOMContentLoaded', function() {
         const images = document.querySelectorAll('img');
