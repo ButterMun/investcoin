@@ -1274,6 +1274,21 @@ coins.forEach(coin => {
 	  
 
       function showScreen(screenId) {
+	  
+	  if (screenId !== 'hashrate-screen') {
+		hideInfo();}
+		
+		if (screenId !== 'friends-screen') {
+		   const friendsList = document.querySelector('.friends-list');
+        friendsList.scrollTop = 0;}
+
+		if (screenId !== 'invest-screen') {
+		const cardsLists = document.querySelectorAll('.investment-cards-wrapper');
+		cardsLists.forEach(cardsList => {
+		cardsList.scrollTop = 0;});
+		}
+	  
+	  
         document.querySelectorAll('.screen').forEach(screen => {
           screen.classList.remove('active');
         });
@@ -1287,17 +1302,6 @@ coins.forEach(coin => {
         });
 		  removeAllClickTexts();
         removeAllCashEmojis();
-
-    const friendsList = document.querySelector('.friends-list');
-        friendsList.scrollTop = 0;
-		
-
-const cardsLists = document.querySelectorAll('.investment-cards-wrapper');
-
-cardsLists.forEach(cardsList => {
-    cardsList.scrollTop = 0;
-});
-		
 		
       }
 
@@ -1314,9 +1318,7 @@ cardsLists.forEach(cardsList => {
         } else {
           infoText = "InvestCoin is a limited-supply cryptocurrency built on the TON platform. With a fixed maximum supply and a halving event every four years, InvestCoin becomes increasingly scarce, enhancing its value and investment appeal within the InvestHub ecosystem.";
         }
-        modalContent.innerHTML = `
-																																			<p>${infoText}</p>
-																																			<button onclick="hideInfo()" class="ok-button">OK</button>`;
+        modalContent.innerHTML = `<p>${infoText}</p><button onclick="hideInfo()" class="ok-button">OK</button>`;
         modal.classList.remove('hide');
         modal.classList.add('show');
         modal.style.display = 'block';
