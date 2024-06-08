@@ -1396,12 +1396,7 @@ coins.forEach(coin => {
 
   function showClickText(event) {
       event.preventDefault();
-
-    // Добавляем вибрацию при нажатии на монету
-    if ('vibrate' in navigator) {
         navigator.vibrate(100); // 100 миллисекунд вибрации
-    }
-
 
       const mainScreen = document.getElementById('main-screen');
       if (!mainScreen.classList.contains('active')) {
