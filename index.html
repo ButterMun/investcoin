@@ -1253,9 +1253,6 @@
         profileName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
         profileID.innerText = `UID: ${tg.initDataUnsafe.user.id}`;
       }
-	console.log('fefwkfwefjkew');
-	
-	
       document.addEventListener('gesturestart', function(e) {
         e.preventDefault();
       });
@@ -1381,96 +1378,100 @@ cardsLists.forEach(cardsList => {
 	  
 	  
 	  
-	  
+	  // Предварительная загрузка изображений
+  const coinImages = [
+      'https://twemoji.maxcdn.com/v/latest/svg/1f4b5.svg',
+      'https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg',
+      'https://twemoji.maxcdn.com/v/latest/svg/1f4b6.svg',
+      'https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg'
+  ];
 
-function showClickText(event) {
-    event.preventDefault();
+  const preloadedImages = coinImages.map(src => {
+      const img = new Image();
+      img.src = src;
+      return img;
+  });
 
-    const mainScreen = document.getElementById('main-screen');
-    if (!mainScreen.classList.contains('active')) {
-        return;
-    }
+  function showClickText(event) {
+      event.preventDefault();
 
-    const clickText = document.createElement('div');
-    clickText.classList.add('click-text');
-    clickText.innerHTML = '+0.001';
-    document.body.appendChild(clickText);
+      const mainScreen = document.getElementById('main-screen');
+      if (!mainScreen.classList.contains('active')) {
+          return;
+      }
 
-    const coinImages = [
-        'https://twemoji.maxcdn.com/v/latest/svg/1f4b5.svg',
-        'https://twemoji.maxcdn.com/v/latest/svg/1f4b8.svg',
-        'https://twemoji.maxcdn.com/v/latest/svg/1f4b6.svg',
-        'https://twemoji.maxcdn.com/v/latest/svg/1f4b7.svg'
-    ];
+      const clickText = document.createElement('div');
+      clickText.classList.add('click-text');
+      clickText.innerHTML = '+0.001';
+      document.body.appendChild(clickText);
 
-    const randomIndex = Math.floor(Math.random() * coinImages.length);
-    const coinImage = coinImages[randomIndex];
+      const randomIndex = Math.floor(Math.random() * preloadedImages.length);
+      const coinImage = preloadedImages[randomIndex].src;
 
-    const cashEmoji = document.createElement('div');
-    cashEmoji.classList.add('cash-emoji');
-    cashEmoji.style.backgroundImage = `url(${coinImage})`;
-    cashEmoji.style.width = '60px';
-    cashEmoji.style.height = '60px';
-//	cashEmoji.style.transform = `rotate(${Math.random() * 360}deg)`;
-    document.body.appendChild(cashEmoji);
+      const cashEmoji = document.createElement('div');
+      cashEmoji.classList.add('cash-emoji');
+      cashEmoji.style.backgroundImage = `url(${coinImage})`;
+      cashEmoji.style.width = '60px';
+      cashEmoji.style.height = '60px';
+      document.body.appendChild(cashEmoji);
 
-    const coinRect = event.target.getBoundingClientRect();
-    const coinCenterX = coinRect.left + coinRect.width / 2;
-    const coinCenterY = coinRect.top + coinRect.height / 2;
+      const coinRect = event.target.getBoundingClientRect();
+      const coinCenterX = coinRect.left + coinRect.width / 2;
+      const coinCenterY = coinRect.top + coinRect.height / 2;
 
-    let clickX, clickY;
-    if (event.type === 'touchstart') {
-        clickX = event.touches[0].clientX;
-        clickY = event.touches[0].clientY;
-    } else {
-        clickX = event.clientX;
-        clickY = event.clientY;
-    }
+      let clickX, clickY;
+      if (event.type === 'touchstart') {
+          clickX = event.touches[0].clientX;
+          clickY = event.touches[0].clientY;
+      } else {
+          clickX = event.clientX;
+          clickY = event.clientY;
+      }
 
-    clickText.style.left = clickX + 'px';
-    clickText.style.top = clickY + 'px';
-    cashEmoji.style.left = coinCenterX + 'px';
-    cashEmoji.style.top = coinCenterY + 'px';
+      clickText.style.left = `${clickX}px`;
+      clickText.style.top = `${clickY}px`;
+      cashEmoji.style.left = `${coinCenterX}px`;
+      cashEmoji.style.top = `${coinCenterY}px`;
 
-    setTimeout(() => {
-        clickText.classList.add('fade-in-text');
-    }, 0);
-    setTimeout(() => {
-        clickText.classList.add('fade-out-text');
-    }, 1250);
-    setTimeout(() => {
-        clickText.remove();
-    }, 2250);
+      setTimeout(() => {
+          clickText.classList.add('fade-in-text');
+      }, 0);
+      setTimeout(() => {
+          clickText.classList.add('fade-out-text');
+      }, 1250);
+      setTimeout(() => {
+          clickText.remove();
+      }, 2250);
 
-    const minAngle = -70 * (Math.PI / 180);
-    const maxAngle = -110 * (Math.PI / 180);
-    const initialAngle = minAngle + Math.random() * (maxAngle - minAngle);
-    const initialVelocity = 15;
-    const gravity = 0.5;
-    let velocityX = initialVelocity * Math.cos(initialAngle);
-    let velocityY = initialVelocity * Math.sin(initialAngle);
+      const minAngle = -70 * (Math.PI / 180);
+      const maxAngle = -110 * (Math.PI / 180);
+      const initialAngle = minAngle + Math.random() * (maxAngle - minAngle);
+      const initialVelocity = 15;
+      const gravity = 0.5;
+      let velocityX = initialVelocity * Math.cos(initialAngle);
+      let velocityY = initialVelocity * Math.sin(initialAngle);
 
-    function animateCashEmoji() {
-        const rect = cashEmoji.getBoundingClientRect();
-        const currentX = rect.left;
-        const currentY = rect.top;
+      function animateCashEmoji() {
+          const rect = cashEmoji.getBoundingClientRect();
+          const currentX = rect.left;
+          const currentY = rect.top;
 
-        velocityY += gravity;
+          velocityY += gravity;
 
-        const newX = currentX + velocityX;
-        const newY = currentY + velocityY;
-        cashEmoji.style.left = newX + 'px';
-        cashEmoji.style.top = newY + 'px';
+          const newX = currentX + velocityX;
+          const newY = currentY + velocityY;
+          cashEmoji.style.left = `${newX}px`;
+          cashEmoji.style.top = `${newY}px`;
 
-        if (newY < window.innerHeight) {
-            requestAnimationFrame(animateCashEmoji);
-        } else {
-            cashEmoji.remove();
-        }
-    }
+          if (newY < window.innerHeight) {
+              requestAnimationFrame(animateCashEmoji);
+          } else {
+              cashEmoji.remove();
+          }
+      }
 
-    animateCashEmoji();
-}
+      animateCashEmoji();
+  }
 
 
       function removeAllClickTexts() {
@@ -1610,17 +1611,17 @@ function showClickText(event) {
 
         function checkFriends() {
             const friendsList = document.getElementById('friends-list');
-            const noFriendsText = document.getElementById('no-friends');
+           // const noFriendsText = document.getElementById('no-friends');
             const friendCount = document.getElementById('friend-count');
 
             const friendCountNumber = friendsList.children.length;
             friendCount.textContent = `${friendCountNumber} Friend${friendCountNumber !== 1 ? 's' : ''}`;
 
-            if (friendCountNumber === 0) {
+          /*  if (friendCountNumber === 0) {
                 noFriendsText.style.display = 'block';
             } else {
                 noFriendsText.style.display = 'none';
-            }
+            } */
         }
 		
 		// <div class="no-friends" id="no-friends">No friends yet</div>
