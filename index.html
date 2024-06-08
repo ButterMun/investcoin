@@ -717,10 +717,9 @@
         position: absolute;
         /* Добавлено */
         color: #ffeb3b;
-        font-size: 30px;
+        font-size: 2em;
         opacity: 0;
-        transition: opacity 0.5s ease, transform 1s ease, top 1s ease;
-        /* Добавлено transform и top в transition */
+        transition: opacity 1s ease, transform 2s ease, top 2s ease;
         pointer-events: none;
         z-index: 100;
         text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
@@ -743,9 +742,39 @@
         transform: translateY(0);
     }
     100% {
-        transform: translateY(-100px); /* Увеличиваем расстояние */
+        transform: translateY(-200px); /* Увеличиваем расстояние */
     }
 }
+
+.cash-emoji {
+    position: absolute;
+    font-size: 3.5em;
+    pointer-events: none;
+    z-index: -1;
+    transform-origin: 50% 50%;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-200px);
+    }
+}
+
+@keyframes fly {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(300px); /* перемещение вниз */
+    }
+}
+
+
+
 
       /* loading */
       .loading-overlay {
@@ -818,7 +847,7 @@
         }
 
         .click-text {
-          font-size: 20px;
+          font-size: 2em;
           /* Уменьшаем размер текста для click-text */
         }
       }
@@ -1336,17 +1365,28 @@ coins.forEach(coin => {
 });
 
 function showClickText(event) {
-    event.preventDefault(); // Чтобы предотвратить стандартное действие при касании или клике
+       event.preventDefault(); // Чтобы предотвратить стандартное действие при касании или клике
 
     const mainScreen = document.getElementById('main-screen');
     if (!mainScreen.classList.contains('active')) {
         return;
     }
+
     const clickText = document.createElement('div');
     clickText.classList.add('click-text');
     clickText.innerHTML = '+0.001';
     document.body.appendChild(clickText);
-    
+
+    const cashEmoji = document.createElement('div');
+    cashEmoji.classList.add('cash-emoji');
+    cashEmoji.innerHTML = '💵';
+    document.body.appendChild(cashEmoji);
+	
+
+    const coinRect = event.target.getBoundingClientRect();
+    const coinCenterX = coinRect.left + coinRect.width / 2;
+    const coinCenterY = coinRect.top + coinRect.height / 2;
+
     let clickX, clickY;
     if (event.type === 'touchstart') {
         clickX = event.touches[0].clientX;
@@ -1358,16 +1398,50 @@ function showClickText(event) {
 
     clickText.style.left = clickX + 'px';
     clickText.style.top = clickY + 'px';
+    cashEmoji.style.left = coinCenterX + 'px';
+    cashEmoji.style.top = coinCenterY + 'px';
 
     setTimeout(() => {
         clickText.classList.add('fade-in-text');
     }, 0);
     setTimeout(() => {
         clickText.classList.add('fade-out-text');
-    }, 500);
+    }, 1250);
     setTimeout(() => {
         clickText.remove();
-    }, 1000);
+    }, 2250);
+
+    // Физика движения для эмодзи купюры
+    const minAngle = -70 * (Math.PI / 180); // минимум угол в радианах
+    const maxAngle = -110 * (Math.PI / 180); // максимум угол в радианах
+    const initialAngle = minAngle + Math.random() * (maxAngle - minAngle); // случайный угол в диапазоне
+    const initialVelocity = 15; // случайная начальная скорость
+    const gravity = 0.5; // гравитация
+    let velocityX = initialVelocity * Math.cos(initialAngle);
+    let velocityY = initialVelocity * Math.sin(initialAngle);
+	
+	
+
+    function animateCashEmoji() {
+        const rect = cashEmoji.getBoundingClientRect();
+        const currentX = rect.left;
+        const currentY = rect.top;
+
+        velocityY += gravity; // применяем гравитацию
+
+        const newX = currentX + velocityX;
+        const newY = currentY + velocityY;
+        cashEmoji.style.left = newX + 'px';
+        cashEmoji.style.top = newY + 'px';
+
+        if (newY < window.innerHeight) {
+            requestAnimationFrame(animateCashEmoji);
+        } else {
+            cashEmoji.remove();
+        }
+    }
+	//cashEmoji.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+    animateCashEmoji();
 }
 
       function removeAllClickTexts() {
